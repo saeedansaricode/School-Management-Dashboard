@@ -39,9 +39,9 @@ async function Events() {
           if (date === event.date)
             return (
               <div
-                className="p-2 rounded-md border-2 border-gray-100 bor-t-4 odd:border-t-schoolBlue even:border-t-schoolPurple dark:border-none dark:odd:bg-schoolLightBlue dark:even:bg-schoolLightPurple"
-                key={event.id}
-              >
+              className="p-2 rounded-md border-2 border-gray-100 bor-t-4 odd:border-t-schoolBlue even:border-t-schoolPurple"
+              key={event.id}
+            >
                 <div className="flex justify-between items-center">
                   <h1 className="font-semibold text-gray-600">{event.title}</h1>
                   <span className="text-xs text-gray-300">
