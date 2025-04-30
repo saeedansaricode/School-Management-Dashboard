@@ -36,9 +36,9 @@ const EventCalender = () => {
   const [value, onChange] = useState<Value>(new Date());
 
   return (
-    <div className="bg-white rounded-xl p-4">
+    <div className="bg-white dark:bg-medium rounded-xl p-4">
       {/* CALENDER */}
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center dark:text-dark">
         <Calendar onChange={onChange} value={value} />
       </div>
       {/* HEADER */}
@@ -55,7 +55,7 @@ const EventCalender = () => {
         {eventsData.map((event) => {
           return (
             <div
-              className="p-2 rounded-md border-2 border-gray-100 bor-t-4 odd:border-t-schoolBlue even:border-t-schoolPurple"
+              className="p-2 rounded-md border-2 border-gray-100 bor-t-4 odd:border-t-schoolBlue even:border-t-schoolPurple dark:border-none dark:odd:bg-schoolLightBlue dark:even:bg-schoolLightPurple"
               key={event.id}
             >
               <div className="flex justify-between items-center">

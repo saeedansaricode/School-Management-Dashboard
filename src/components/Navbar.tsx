@@ -13,9 +13,9 @@ const Navbar = () => {
           placeholder="Search..."
           className="w-[200px] p-2 bg-transparent outline-none "
         />
-        <div>
-          <ThemeToggle />
-        </div>
+      </div>
+      <div>
+        <ThemeToggle />
       </div>
       {/* ICONS AND PROFILE*/}
       <div className="flex items-center gap-6 justify-end w-full">
