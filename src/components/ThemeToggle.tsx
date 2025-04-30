@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 
@@ -18,11 +18,13 @@ function ThemeToggle() {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
     }
-  }, [darkMode]); 
+  }, [darkMode]);
 
   return (
-    <div>ThemeToggle</div>
-  );
+    <div onClick={() => setDarkMode(!darkMode)}>
+      ThemeToggle
+    </div>
+  )
 }
 
 export default ThemeToggle;
