@@ -21,6 +21,8 @@ const config: Config = {
         schoolLightPurple: "#F1F0FF",
         schoolYellow: "#FAE27C",
         schoolLightYellow: "#FEFCE8",
+        dark: "#232A3C",
+        medium: "#293245"
       },
     },
   },
