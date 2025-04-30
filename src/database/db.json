@@ -322,65 +322,73 @@
       "id": 1,
       "title": "Lake Trip",
       "class": "1A",
-      "date": "2025-01-05",
-      "startTime": "10:00",
-      "endTime": "11:00"
+      "date": "2025-4-30",
+      "startTime": "10:00 AM",
+      "endTime": "11:00 AM",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, tempora."
     },
     {
       "id": 2,
       "title": "Picnic",
       "class": "2A",
-      "date": "2025-01-06",
-      "startTime": "10:00",
-      "endTime": "11:00"
+      "date": "2025-4-30",
+      "startTime": "10:00 AM",
+      "endTime": "12:00 AM",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, tempora."
     },
     {
       "id": 3,
       "title": "Beach Trip",
       "class": "3A",
       "date": "2025-02-05",
-      "startTime": "10:00",
-      "endTime": "11:00"
+      "startTime": "10:00 AM",
+      "endTime": "03:00 PM",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, tempora."
     },
     {
       "id": 4,
       "title": "Museum Trip",
       "class": "4A",
       "date": "2025-02-06",
-      "startTime": "10:00",
-      "endTime": "11:00"
+      "startTime": "08:00 AM",
+      "endTime": "02:45 PM",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, tempora."
     },
     {
       "id": 5,
       "title": "Music Concert",
       "class": "5A",
       "date": "2025-01-01",
-      "startTime": "10:00",
-      "endTime": "11:00"
+      "startTime": "06:00 PM",
+      "endTime": "10:00 PM",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, tempora."
     },
     {
       "id": 6,
       "title": "Magician Show",
       "class": "1B",
       "date": "2025-01-01",
-      "startTime": "10:00",
-      "endTime": "11:00"
+      "startTime": "10:00 AM",
+      "endTime": "11:00 AM",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, tempora."
     },
     {
       "id": 7,
       "title": "Lake Trip",
       "class": "2B",
       "date": "2025-01-01",
-      "startTime": "10:00",
-      "endTime": "11:00"
+      "startTime": "10:00 AM",
+      "endTime": "11:00 AM",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, tempora."
     },
     {
       "id": 8,
       "title": "Cycling Race",
       "class": "3B",
       "date": "2025-01-01",
-      "startTime": "10:00",
-      "endTime": "11:00"
+      "startTime": "10:00 AM",
+      "endTime": "11:00 AM",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, tempora."
     }
   ],
   "subjectsData": [
@@ -578,70 +586,70 @@
       "subject": "Math",
       "class": "1A",
       "teacher": "Martha Morris",
-      "date": "2025-01-01"
+      "date": "2025-1-01"
     },
     {
       "id": 2,
       "subject": "English",
       "class": "2A",
       "teacher": "Randall Garcia",
-      "date": "2025-01-01"
+      "date": "2025-1-01"
     },
     {
       "id": 3,
       "subject": "Science",
       "class": "3A",
       "teacher": "Myrtie Scott",
-      "date": "2025-01-01"
+      "date": "2025-1-01"
     },
     {
       "id": 4,
       "subject": "Social Studies",
       "class": "1B",
       "teacher": "Alvin Swanson",
-      "date": "2025-01-01"
+      "date": "2025-1-01"
     },
     {
       "id": 5,
       "subject": "Art",
       "class": "4A",
       "teacher": "Mabelle Wallace",
-      "date": "2025-01-01"
+      "date": "2025-1-01"
     },
     {
       "id": 6,
       "subject": "Music",
       "class": "5A",
       "teacher": "Dale Thompson",
-      "date": "2025-01-01"
+      "date": "2025-1-01"
     },
     {
       "id": 7,
       "subject": "History",
       "class": "6A",
       "teacher": "Allie Conner",
-      "date": "2025-01-01"
+      "date": "2025-1-01"
     },
     {
       "id": 8,
       "subject": "Geography",
       "class": "6B",
       "teacher": "Hunter Fuller",
-      "date": "2025-01-01"
+      "date": "2025-1-01"
     },
     {
       "id": 9,
       "subject": "Physics",
       "class": "7A",
       "teacher": "Lois Lindsey",
-      "date": "2025-01-01"
+      "date": "2025-1-01"
     },
     {
       "id": 10,
       "subject": "Chemistry",
       "class": "8A",
       "teacher": "Vera Soto",
-      "date": "2025-01-01"
+      "date": "2025-1-01"
     }
   ],
 
@@ -651,70 +659,70 @@
       "subject": "Math",
       "class": "1A",
       "teacher": "Anthony Boone",
-      "dueDate": "2025-01-01"
+      "dueDate": "2025-1-01"
     },
     {
       "id": 2,
       "subject": "English",
       "class": "2A",
       "teacher": "Clifford Bowen",
-      "dueDate": "2025-01-01"
+      "dueDate": "2025-1-01"
     },
     {
       "id": 3,
       "subject": "Science",
       "class": "3A",
       "teacher": "Catherine Malone",
-      "dueDate": "2025-01-01"
+      "dueDate": "2025-1-01"
     },
     {
       "id": 4,
       "subject": "Social Studies",
       "class": "1B",
       "teacher": "Willie Medina",
-      "dueDate": "2025-01-01"
+      "dueDate": "2025-1-01"
     },
     {
       "id": 5,
       "subject": "Art",
       "class": "4A",
       "teacher": "Jose Ruiz",
-      "dueDate": "2025-01-01"
+      "dueDate": "2025-1-01"
     },
     {
       "id": 6,
       "subject": "Music",
       "class": "5A",
       "teacher": "Katharine Owens",
-      "dueDate": "2025-01-01"
+      "dueDate": "2025-1-01"
     },
     {
       "id": 7,
       "subject": "History",
       "class": "6A",
       "teacher": "Shawn Norman",
-      "dueDate": "2025-01-01"
+      "dueDate": "2025-1-01"
     },
     {
       "id": 8,
       "subject": "Geography",
       "class": "6B",
       "teacher": "Don Holloway",
-      "dueDate": "2025-01-01"
+      "dueDate": "2025-1-01"
     },
     {
       "id": 9,
       "subject": "Physics",
       "class": "7A",
       "teacher": "Franklin Gregory",
-      "dueDate": "2025-01-01"
+      "dueDate": "2025-1-01"
     },
     {
       "id": 10,
       "subject": "Chemistry",
       "class": "8A",
       "teacher": "Danny Nguyen",
-      "dueDate": "2025-01-01"
+      "dueDate": "2025-1-01"
     }
   ],
   "resultsData": [
@@ -724,7 +732,7 @@
       "class": "1A",
       "teacher": "John Doe",
       "student": "John Doe",
-      "date": "2025-01-01",
+      "date": "2025-1-01",
       "type": "exam",
       "score": 90
     },
@@ -734,7 +742,7 @@
       "class": "2A",
       "teacher": "John Doe",
       "student": "John Doe",
-      "date": "2025-01-01",
+      "date": "2025-1-01",
       "type": "exam",
       "score": 90
     },
@@ -744,7 +752,7 @@
       "class": "3A",
       "teacher": "John Doe",
       "student": "John Doe",
-      "date": "2025-01-01",
+      "date": "2025-1-01",
       "type": "exam",
       "score": 90
     },
@@ -754,7 +762,7 @@
       "class": "1B",
       "teacher": "John Doe",
       "student": "John Doe",
-      "date": "2025-01-01",
+      "date": "2025-1-01",
       "type": "exam",
       "score": 90
     },
@@ -764,7 +772,7 @@
       "class": "4A",
       "teacher": "John Doe",
       "student": "John Doe",
-      "date": "2025-01-01",
+      "date": "2025-1-01",
       "type": "exam",
       "score": 90
     },
@@ -774,7 +782,7 @@
       "class": "5A",
       "teacher": "John Doe",
       "student": "John Doe",
-      "date": "2025-01-01",
+      "date": "2025-1-01",
       "type": "exam",
       "score": 90
     },
@@ -784,7 +792,7 @@
       "class": "6A",
       "teacher": "John Doe",
       "student": "John Doe",
-      "date": "2025-01-01",
+      "date": "2025-1-01",
       "type": "exam",
       "score": 90
     },
@@ -794,7 +802,7 @@
       "class": "6B",
       "teacher": "John Doe",
       "student": "John Doe",
-      "date": "2025-01-01",
+      "date": "2025-1-01",
       "type": "exam",
       "score": 90
     },
@@ -804,7 +812,7 @@
       "class": "7A",
       "teacher": "John Doe",
       "student": "John Doe",
-      "date": "2025-01-01",
+      "date": "2025-1-01",
       "type": "exam",
       "score": 90
     },
@@ -814,7 +822,7 @@
       "class": "8A",
       "teacher": "John Doe",
       "student": "John Doe",
-      "date": "2025-01-01",
+      "date": "2025-1-01",
       "type": "exam",
       "score": 90
     }
@@ -824,61 +832,61 @@
       "id": 1,
       "title": "About 4A Math Test",
       "class": "4A",
-      "date": "2025-01-01"
+      "date": "2025-1-01"
     },
     {
       "id": 2,
       "title": "About 3A Math Test",
       "class": "3A",
-      "date": "2025-01-01"
+      "date": "2025-1-01"
     },
     {
       "id": 3,
       "title": "About 3B Math Test",
       "class": "3B",
-      "date": "2025-01-01"
+      "date": "2025-1-01"
     },
     {
       "id": 4,
       "title": "About 6A Math Test",
       "class": "6A",
-      "date": "2025-01-01"
+      "date": "2025-1-01"
     },
     {
       "id": 5,
       "title": "About 8C Math Test",
       "class": "8C",
-      "date": "2025-01-01"
+      "date": "2025-1-01"
     },
     {
       "id": 6,
       "title": "About 2A Math Test",
       "class": "2A",
-      "date": "2025-01-01"
+      "date": "2025-1-01"
     },
     {
       "id": 7,
       "title": "About 4C Math Test",
       "class": "4C",
-      "date": "2025-01-01"
+      "date": "2025-1-01"
     },
     {
       "id": 8,
       "title": "About 4B Math Test",
       "class": "4B",
-      "date": "2025-01-01"
+      "date": "2025-1-01"
     },
     {
       "id": 9,
       "title": "About 3C Math Test",
       "class": "3C",
-      "date": "2025-01-01"
+      "date": "2025-1-01"
     },
     {
       "id": 10,
       "title": "About 1C Math Test",
       "class": "1C",
-      "date": "2025-01-01"
+      "date": "2025-1-01"
     }
   ]
 }
