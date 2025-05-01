@@ -18,23 +18,35 @@ async function Announcements() {
   const date = CurrentDate();
 
   if (!announcementsData) {
-    return <p>Error fetching data</p>;
-  }
-
-  return (
-    <div className="bg-white rounded-xl p-4">
-      {/* HEADER */}
-      <div className="flex justify-between items-center my-2">
-        <h1 className="text-lg font-semibold">Announcements</h1>
-        <Link href="/list/announcements">
-          <span className="text-xs text-gray-300"> View All</span>
-        </Link>
+    return (
+      <div className="bg-white rounded-xl p-4">
+        {/* HEADER */}
+        <div className="flex justify-between items-center my-2">
+          <h1 className="text-lg font-semibold">Announcements</h1>
+          <Link href="/list/announcements">
+            <span className="text-xs text-gray-300"> View All</span>
+          </Link>
+        </div>
+        {/* BODY */}
+        <div className="flex flex-col gap-4 mt-4">
+          <p className="flex justify-center items-center mt-2 text-gray-400 text-sm">Data Fetch Error</p>
+        </div>
       </div>
-      {/* ANNOUNCEMENTS */}
-      <div className="flex flex-col gap-4 mt-4">
-        {
-          announcementsData.map((announcement) => {
-            if (date === announcement.date)
+    );
+  } else if (announcementsData) {
+    return (
+      <div className="bg-white rounded-xl p-4">
+        {/* HEADER */}
+        <div className="flex justify-between items-center my-2">
+          <h1 className="text-lg font-semibold">Announcements</h1>
+          <Link href="/list/announcements">
+            <span className="text-xs text-gray-300"> View All</span>
+          </Link>
+        </div>
+        {/* body */}
+        <div className="flex flex-col gap-4 mt-4">
+          {announcementsData.map((announcement) => {
+            if (date === announcement.date) {
               return (
                 <div
                   className="bg-schoolLightBlue round-md p-2"
@@ -53,11 +65,15 @@ async function Announcements() {
                   </p>
                 </div>
               );
-          })
-        }
+            }
+          })}
+          <div>
+            <p className="flex justify-center items-center mt-2 text-gray-400 text-sm">No announcement today</p>
+          </div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default Announcements;
