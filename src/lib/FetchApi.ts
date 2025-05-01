@@ -1,5 +1,6 @@
 
 export const fetchApi = async <T>(url: string): Promise<T | null> => {
+
     try {
       const res = await fetch(url);
   
