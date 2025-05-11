@@ -32,7 +32,7 @@ const SubjectListPage = () => {
   const renderRow = (item: Subject) => (
     <tr
       key={item.id}
-      className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-schoolLightPurple"
+      className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-schoolLightPurple dark:bg-medium dark:hover:bg-dark"
     >
       <td className="flex items-center gap-4 p-4">
         <div className="flex flex-col">
@@ -54,7 +54,7 @@ const SubjectListPage = () => {
   );
 
   return (
-    <div className="flex flex-col p-4 bg-white rounded-lg m-4 mt-0">
+    <div className="flex flex-col p-4 bg-white rounded-lg m-4 mt-0  dark:bg-medium">
       {/* HEADER */}
       <div className="flex items-center justify-between">
         <div className="hidden md:block justify-start">

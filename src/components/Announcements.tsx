@@ -3,6 +3,38 @@ import React from "react";
 import CurrentDate from "./CurrentDate";
 import fetchApi from "@/lib/FetchApi";
 
+const announcements = [
+    {
+      id: 1,
+      title: "Lorem ipsum dolor",
+      date: " 2025-01-01 ",
+      descriprion:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, tempora.",
+    },
+    {
+      id: 2,
+      title: "Lorem ipsum dolor",
+      date: " 2025-02-05 ",
+      descriprion:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, tempora.",
+    },
+    {
+      id: 3,
+      title: "Lorem ipsum dolor",
+      date: " 2025-09-17 ",
+      descriprion:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, tempora.",
+    },
+  ];
+const Announcements = () => {
+  return (
+    <div className="bg-white dark:bg-medium rounded-xl p-4">
+      {/* HEADER */}
+      <div className="flex justify-between items-center my-2">
+        <h1 className="text-lg font-semibold">Announcements</h1>
+        <Link href="/list/announcements">
+          <span className="text-xs text-gray-300"> View All</span>
+        </Link>
 interface Announcement {
   id: number;
   title: string;

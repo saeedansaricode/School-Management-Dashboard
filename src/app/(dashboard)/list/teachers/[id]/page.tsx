@@ -71,7 +71,7 @@ const SingleTeacherPage = () => {
           {/* SMALL CARTS */}
           <div className="flex-1 w-full flex justify-between flex-wrap gap-4 md:flex-row ">
             {/* CARD 1 */}
-            <div className="w-full bg-white rounded-md p-4 gap-4 flex md:w-[48%] lg:w-full xl:w-[45%]">
+            <div className="w-full bg-schoolPurple rounded-md p-4 gap-4 flex md:w-[48%] lg:w-full xl:w-[45%]">
               <Image
                 src="/singleAttendance.png"
                 alt="singleAttendance"
@@ -85,7 +85,7 @@ const SingleTeacherPage = () => {
               </div>
             </div>
             {/* CARD 2 */}
-            <div className="w-full bg-white rounded-md p-4 gap-4 flex md:w-[48%] lg:w-full xl:w-[45%]">
+            <div className="w-full bg-schoolYellow rounded-md p-4 gap-4 flex md:w-[48%] lg:w-full xl:w-[45%]">
               <Image
                 src="/singleClass.png"
                 alt="singleClass"
@@ -99,7 +99,7 @@ const SingleTeacherPage = () => {
               </div>
             </div>
             {/* CARD 3 */}
-            <div className="w-full bg-white rounded-md p-4 gap-4 flex md:w-[48%] lg:w-full xl:w-[45%]">
+            <div className="w-full bg-schoolPurple rounded-md p-4 gap-4 flex md:w-[48%] lg:w-full xl:w-[45%]">
               <Image
                 src="/singleLesson.png"
                 alt="singleLesson"
@@ -113,7 +113,7 @@ const SingleTeacherPage = () => {
               </div>
             </div>
             {/* CARD 4 */}
-            <div className="w-full bg-white rounded-md p-4 gap-4 flex md:w-[48%] lg:w-full xl:w-[45%]">
+            <div className="w-full bg-schoolYellow rounded-md p-4 gap-4 flex md:w-[48%] lg:w-full xl:w-[45%]">
               <Image
                 src="/singleBranch.png"
                 alt="singleBranch"
@@ -137,7 +137,7 @@ const SingleTeacherPage = () => {
       {/* RIGHT */}
       <div className="w-full xl:w-1/3 flex flex-col gap-4">
         {/* SHORTCUTS */}
-        <div className="bg-white p-4 rounded-md">
+        <div className="bg-white p-4 rounded-md  dark:bg-medium">
           <h1 className="text-xl font-semibold">Shortcuts</h1>
           <div className="flex flex-wrap gap-4 mt-4 text-xs text-gray-500">
             <Link className="p-3 rounded-md bg-schoolLightBlue" href="/">
