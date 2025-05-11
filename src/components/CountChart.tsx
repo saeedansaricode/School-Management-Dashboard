@@ -1,7 +1,7 @@
-"use client";
+"use client"
 import Image from "next/image";
 import Link from "next/link";
-import React, { PureComponent } from "react";
+import React, { PureComponent, useEffect, useState} from "react";
 import {
   RadialBarChart,
   RadialBar,
@@ -17,24 +17,28 @@ const data = [
   },
   {
     name: "Girls",
-    count: 45,
+    count: 40,
     fill: "#FAE27C",
   },
   {
     name: "Boys",
-    count: 55,
+    count: 60,
     fill: "#C3EBFA",
   },
 ];
 
-const style = {
-  top: "50%",
-  right: 0,
-  transform: "translate(0, -50%)",
-  lineHeight: "24px",
-};
+// const style = {
+//   top: "50%",
+//   right: 0,
+//   transform: "translate(0, -50%)",
+//   lineHeight: "24px",
+// };
 
-function CountChart() {
+const CountChart = ()=> {
+  const male = 6;
+  const female = 4;
+  const all = male + female;
+
   return (
     <div className=" bg-white rounded-xl w-full h-full p-4">
       {/* HEADER */}
@@ -70,13 +74,13 @@ function CountChart() {
       <div className="flex justify-center gap-16">
         <div className="flex flex-col gap-1">
           <div className="w-4 h-4 bg-schoolBlue rounded-full" />
-          <h1 className="font-bold">1,549</h1>
-          <h2 className="text-xs text-gray-300"> Boys (55%)</h2>
+          <h1 className="font-bold">{male ? male : 0}</h1>
+          <h2 className="text-xs text-gray-300">{data[2].name + " " + data[2].count}%</h2>
         </div>
         <div className="flex flex-col gap-1">
           <div className="w-4 h-4 bg-schoolYellow rounded-full" />
-          <h1 className="font-bold">1,245</h1>
-          <h2 className="text-xs text-gray-300"> Girls (45%)</h2>
+          <h1 className="font-bold">{female ? female : 0}</h1>
+          <h2 className="text-xs text-gray-300">{data[1].name + " " + data[1].count}%</h2>
         </div>
       </div>
     </div>
