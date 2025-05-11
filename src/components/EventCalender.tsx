@@ -67,6 +67,7 @@ const EventCalender = () => {
           );
         })}
       </div>
+
     </div>
   );
 };
