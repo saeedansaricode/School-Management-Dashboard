@@ -42,7 +42,7 @@ async function Announcements() {
 
   if (!announcementsData) {
     return (
-      <div className="bg-white rounded-xl p-4">
+      <div className="bg-white dark:bg-medium rounded-xl p-4">
         {/* HEADER */}
         <div className="flex justify-between items-center my-2">
           <h1 className="text-lg font-semibold">Announcements</h1>
@@ -60,7 +60,7 @@ async function Announcements() {
     );
   } else if (announcementsData) {
     return (
-      <div className="bg-white rounded-xl p-4">
+      <div className="bg-white dark:bg-medium rounded-xl p-4">
         {/* HEADER */}
         <div className="flex justify-between items-center my-2">
           <h1 className="text-lg font-semibold">Announcements</h1>
@@ -93,9 +93,7 @@ async function Announcements() {
             }
           })}
           <div>
-            <p className="flex justify-center items-center mt-2 text-gray-400 text-sm">
-              No announcement today
-            </p>
+            <p className="flex justify-center items-center mt-2 text-gray-400 text-sm">No announcements today.</p>
           </div>
         </div>
       </div>
