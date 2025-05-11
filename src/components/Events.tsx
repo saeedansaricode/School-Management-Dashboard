@@ -19,7 +19,7 @@ async function Events() {
 
   if (!eventsData) {
     return (
-      <div className="bg-white rounded-xl p-4">
+      <div className="bg-white dark:bg-medium rounded-xl p-4">
         {/* HEADER */}
         <div className="flex justify-between items-center my-2">
           <h1 className="text-lg font-semibold">Events</h1>
@@ -35,7 +35,7 @@ async function Events() {
     );
   } else if (eventsData) {
     return (
-      <div className="bg-white rounded-xl p-4">
+      <div className="bg-white dark:bg-medium rounded-xl p-4">
         {/* HEADER */}
         <div className="flex justify-between items-center my-2">
           <h1 className="text-lg font-semibold">Events</h1>
