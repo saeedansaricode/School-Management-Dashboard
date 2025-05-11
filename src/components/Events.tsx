@@ -68,7 +68,7 @@ async function Events() {
             }
           })}
           <div>
-            <p className="flex justify-center items-center mt-2 text-gray-400 text-sm">No event today</p>
+            <p className="flex justify-center items-center mt-2 text-gray-400 text-sm">No events today.</p>
           </div>
         </div>
       </div>
