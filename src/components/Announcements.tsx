@@ -3,6 +3,29 @@ import React from "react";
 import CurrentDate from "./CurrentDate";
 import fetchApi from "@/lib/FetchApi";
 
+const announcements = [
+  {
+    id: 1,
+    title: "Lorem ipsum dolor",
+    date: " 2025-01-01 ",
+    descriprion:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, tempora.",
+  },
+  {
+    id: 2,
+    title: "Lorem ipsum dolor",
+    date: " 2025-02-05 ",
+    descriprion:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, tempora.",
+  },
+  {
+    id: 3,
+    title: "Lorem ipsum dolor",
+    date: " 2025-09-17 ",
+    descriprion:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, tempora.",
+  },
+];
 interface Announcement {
   id: number;
   title: string;
@@ -29,7 +52,9 @@ async function Announcements() {
         </div>
         {/* BODY */}
         <div className="flex flex-col gap-4 mt-4">
-          <p className="flex justify-center items-center mt-2 text-gray-400 text-sm">Data Fetch Error</p>
+          <p className="flex justify-center items-center mt-2 text-gray-400 text-sm">
+            Data Fetch Error
+          </p>
         </div>
       </div>
     );
