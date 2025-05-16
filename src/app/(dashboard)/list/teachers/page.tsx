@@ -127,7 +127,7 @@ async function TeacherListPage () {
       </div>
 
       {/* LIST */}
-      <Table columns={columns} renderRow={renderRow} data={teachersData} />
+      <Table columns={columns} renderRow={renderRow} data={data} />
 
       {/* PAGINATION */}
       <Pagination />
