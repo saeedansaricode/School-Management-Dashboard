@@ -55,7 +55,7 @@ const renderRow = (item: TeacherList) => (
 
     <td className="flex items-center gap-4 p-4">
       <Image
-        src={item.photo}
+        src={item.img || "/public/noAvatar.png"}
         alt="photo"
         width={40}
         height={40}
@@ -66,9 +66,9 @@ const renderRow = (item: TeacherList) => (
         <p className="text-xs text-gray-500">{item?.email}</p>
       </div>
     </td>
-    <td className="hidden md:table-cell">{item.teacherId}</td>
-    <td className="hidden md:table-cell">{item.subjects.join(",")}</td>
-    <td className="hidden md:table-cell">{item.classes.join(",")}</td>
+    <td className="hidden md:table-cell">{item.username}</td>
+    <td className="hidden md:table-cell">{item.subjects.map(subject => subject.name).join(", ")}</td>
+    <td className="hidden md:table-cell">{item.classes.map(classItem => classItem.name).join(", ")}</td>
     <td className="hidden lg:table-cell">{item.phone}</td>
     <td className="hidden lg:table-cell">{item.address}</td>
     <td>
