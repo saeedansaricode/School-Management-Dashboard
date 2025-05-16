@@ -3,20 +3,12 @@ import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { role, teachersData } from "@/lib/data";
+import { Class, Subject, Teacher } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
-type Teacher = {
-  id: number;
-  teacherId: string;
-  name: string;
-  email: string;
-  photo: string;
-  phone: string;
-  subjects: string[];
-  classes: string[];
-  address: string;
-};
+// TYPES FROME PRISMA/CLIENT DATABASE
+type TeacherList = Teacher & {subjects: Subject[]} & {classes: Class[]}
 
 const columns = [
   {
