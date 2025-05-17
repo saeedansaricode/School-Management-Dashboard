@@ -89,7 +89,16 @@ const renderRow = (item: TeacherList) => (
   </tr>
 );
 
-async function TeacherListPage () {
+async function TeacherListPage ({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined };
+}) {
+
+  // GET SEARCHPARAMS AND CALCULATING PAGENUMBER INFO
+  const {page, ...queryParams} = await searchParams
+  const p = page ? parseInt(page) : 1 ;
+
   const data = await prisma.teacher.findMany({
     include : {
       subjects: true,
