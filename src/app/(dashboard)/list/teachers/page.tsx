@@ -4,6 +4,7 @@ import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { role, teachersData } from "@/lib/data";
 import { prisma } from "@/lib/prisma";
+import { ITEM_PER_PAGE } from "@/lib/settings";
 import { Class, Subject, Teacher } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
@@ -104,6 +105,10 @@ async function TeacherListPage ({
       subjects: true,
       classes: true,
     },
+
+    // DATA FETCHING OPTIMIZATION 
+    take: ITEM_PER_PAGE,
+    skip: ITEM_PER_PAGE * ( p - 1 ),
   })
   
 
