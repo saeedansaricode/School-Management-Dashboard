@@ -100,17 +100,22 @@ async function TeacherListPage ({
   const {page, ...queryParams} = await searchParams
   const p = page ? parseInt(page) : 1 ;
 
-  const data = await prisma.teacher.findMany({
-    include : {
-      subjects: true,
-      classes: true,
-    },
+  const [data, count] = await prisma.$transaction([
 
-    // DATA FETCHING OPTIMIZATION 
-    take: ITEM_PER_PAGE,
-    skip: ITEM_PER_PAGE * ( p - 1 ),
-  })
-  
+    prisma.teacher.findMany({
+      include : {
+        subjects: true,
+        classes: true,
+      },
+      
+      // DATA FETCHING OPTIMIZATION 
+      take: ITEM_PER_PAGE,
+      skip: ITEM_PER_PAGE * ( p - 1 ),
+    }),
+
+    // GET ALL DATA LENGTH 
+    prisma.teacher.count()
+  ])
 
   return (
     <div className="flex flex-col p-4 bg-white rounded-lg m-4 mt-0  dark:bg-medium">
@@ -144,7 +149,7 @@ async function TeacherListPage ({
       <Table columns={columns} renderRow={renderRow} data={data} />
 
       {/* PAGINATION */}
-      <Pagination />
+      <Pagination page={p} count={count}/>
     </div>
   );
 };
