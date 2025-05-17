@@ -18,7 +18,7 @@ function Pagination({ page, count }: { page: number; count: number }) {
   return (
     <div className="flex justify-between items-center text-gray-500">
       <button
-        disabled
+        disabled={!hasPerv}
         className="rounded-sm bg-slate-200 py-2 px-2 text-xs font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
         onClick={() => {
           changePage(page - 1);
@@ -50,7 +50,7 @@ function Pagination({ page, count }: { page: number; count: number }) {
         )}
       </div>
       <button
-        disabled
+        disabled={!hasNext}
         className="rounded-sm bg-slate-200 py-2 px-2 text-xs font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
         onClick={() => {
           changePage(page + 1);
