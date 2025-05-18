@@ -36,7 +36,7 @@ const renderRow = (item: SubjectList) => (
         <h3 className="font-semibold">{item.name}</h3>
       </div>
     </td>
-    <td className="hidden md:table-cell">{item.teachers.join(", ")}</td>
+    <td className="hidden md:table-cell">{item.teachers.map(teacher => teacher.name).join(", ")}</td>
     <td>
       <div className="flex items-center gap-2">
         <Link href={`/list/teachers/${item.id}`}>
