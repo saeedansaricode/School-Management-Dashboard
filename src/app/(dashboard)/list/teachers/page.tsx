@@ -5,12 +5,12 @@ import TableSearch from "@/components/TableSearch";
 import { role, teachersData } from "@/lib/data";
 import { prisma } from "@/lib/prisma";
 import { ITEM_PER_PAGE } from "@/lib/settings";
-import { Class, Subject, Teacher } from "@prisma/client";
+import { Class, Prisma, Subject, Teacher } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
 // TYPES FROME PRISMA/CLIENT DATABASE
-type TeacherList = Teacher & {subjects: Subject[]} & {classes: Class[]}
+type TeacherList = Teacher & { subjects: Subject[] } & { classes: Class[] };
 
 const columns = [
   {
@@ -53,7 +53,6 @@ const renderRow = (item: TeacherList) => (
     key={item.id}
     className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-schoolLightPurple dark:bg-medium dark:hover:bg-dark"
   >
-
     <td className="flex items-center gap-4 p-4">
       <Image
         src={item.img || "/public/noAvatar.png"}
@@ -68,8 +67,12 @@ const renderRow = (item: TeacherList) => (
       </div>
     </td>
     <td className="hidden md:table-cell">{item.username}</td>
-    <td className="hidden md:table-cell">{item.subjects.map(subject => subject.name).join(", ")}</td>
-    <td className="hidden md:table-cell">{item.classes.map(classItem => classItem.name).join(", ")}</td>
+    <td className="hidden md:table-cell">
+      {item.subjects.map((subject) => subject.name).join(", ")}
+    </td>
+    <td className="hidden md:table-cell">
+      {item.classes.map((classItem) => classItem.name).join(", ")}
+    </td>
     <td className="hidden lg:table-cell">{item.phone}</td>
     <td className="hidden lg:table-cell">{item.address}</td>
     <td>
@@ -83,39 +86,55 @@ const renderRow = (item: TeacherList) => (
           // <button className="w-7 h-7 flex items-center justify-center bg-schoolPurple rounded-full">
           //   <Image src="/delete.png" alt="delete" width={16} height={16} />
           // </button>
-          <FormModal table="Teacher" type="delete" id={item.id}/>
+          <FormModal table="Teacher" type="delete" id={item.id} />
         )}
       </div>
     </td>
   </tr>
 );
 
-async function TeacherListPage ({
+async function TeacherListPage({
   searchParams,
 }: {
   searchParams: { [key: string]: string | undefined };
 }) {
-
   // GET SEARCHPARAMS AND CALCULATING PAGENUMBER INFO
-  const {page, ...queryParams} = await searchParams
-  const p = page ? parseInt(page) : 1 ;
+  const { page, ...queryParams } = await searchParams;
+  const p = page ? parseInt(page) : 1;
+
+  // URL PARAMS CONDITION
+  const query: Prisma.TeacherWhereInput = {};
+  if (queryParams) {
+    for (const [key, value] of Object.entries(queryParams)) {
+      if (value !== undefined) {
+        switch (key) {
+          case "classId":
+            query.lessons = {
+              some: {
+                classId: parseInt(value),
+              },
+            };
+            break;
+        }
+      }
+    }
+  }
 
   const [data, count] = await prisma.$transaction([
-
     prisma.teacher.findMany({
-      include : {
+      include: {
         subjects: true,
         classes: true,
       },
-      
-      // DATA FETCHING OPTIMIZATION 
+
+      // DATA FETCHING OPTIMIZATION
       take: ITEM_PER_PAGE,
-      skip: ITEM_PER_PAGE * ( p - 1 ),
+      skip: ITEM_PER_PAGE * (p - 1),
     }),
 
-    // GET ALL DATA LENGTH 
-    prisma.teacher.count()
-  ])
+    // GET ALL DATA LENGTH
+    prisma.teacher.count(),
+  ]);
 
   return (
     <div className="flex flex-col p-4 bg-white rounded-lg m-4 mt-0  dark:bg-medium">
@@ -139,7 +158,7 @@ async function TeacherListPage ({
               // <button className="w-8 h-8 flex items-center justify-center rounded-full bg-schoolYellow">
               //   <Image src="/plus.png" alt="plus" width={14} height={14} />
               // </button>
-              <FormModal table="Teacher" type="create"/>
+              <FormModal table="Teacher" type="create" />
             )}
           </div>
         </div>
@@ -149,9 +168,9 @@ async function TeacherListPage ({
       <Table columns={columns} renderRow={renderRow} data={data} />
 
       {/* PAGINATION */}
-      <Pagination page={p} count={count}/>
+      <Pagination page={p} count={count} />
     </div>
   );
-};
+}
 
 export default TeacherListPage;
