@@ -3,6 +3,8 @@ import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { classesData, role } from "@/lib/data";
+import { ITEM_PER_PAGE } from "@/lib/settings";
+import { Prisma } from "@prisma/client";
 import Image from "next/image";
 
 type Class = {
@@ -74,11 +76,14 @@ async function ClassListPage ({
   const p = page ? parseInt(page) : 1;
 
   // URL PARAMS CONDITION
-  const query: Prisma.SubjectWhereInput = {};
+  const query: Prisma.ClassWhereInput = {};
   if (queryParams) {
     for (const [key, value] of Object.entries(queryParams)) {
       if (value !== undefined) {
         switch (key) {
+          case "supervisorId":
+            query.supervisorId = value;
+            break;
           case "search":
             query.name = { contains: value, mode: "insensitive" };
             break;
@@ -90,10 +95,10 @@ async function ClassListPage ({
   }
 
   const [data, count] = await prisma.$transaction([
-    prisma.subject.findMany({
+    prisma.class.findMany({
       where: query,
       include: {
-        teachers: true,
+        supervisor: true,
       },
 
       // DATA FETCHING OPTIMIZATION
@@ -102,7 +107,7 @@ async function ClassListPage ({
     }),
 
     // GET ALL DATA LENGTH
-    prisma.subject.count({ where: query }),
+    prisma.class.count({ where: query }),
   ]);
 
   return (
