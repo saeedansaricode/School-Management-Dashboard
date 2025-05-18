@@ -2,7 +2,7 @@ import FormModal from "@/components/FormModal";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
-import { role, studentsData } from "@/lib/data";
+import { role } from "@/lib/data";
 import { ITEM_PER_PAGE } from "@/lib/settings";
 import { Class, Prisma, Student } from "@prisma/client";
 import Image from "next/image";
@@ -23,11 +23,6 @@ const columns = [
   {
     header: "Grade",
     accessor: "grades",
-    className: "hidden md:table-cell",
-  },
-  {
-    header: "Class",
-    accessor: "class",
     className: "hidden md:table-cell",
   },
   {
@@ -52,22 +47,28 @@ const renderRow = (item: StudentList) => (
     className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-schoolLightPurple dark:bg-medium dark:hover:bg-dark"
   >
     <td className="flex items-center gap-4 p-4">
+      {/* PROFILE IMAGE */}
       <Image
-        src={item.photo}
+        src={item.img || "/noAvatar.png"}
         alt="photo"
         width={40}
         height={40}
         className="md:hidden xl:block w-10 h-10 rounded-full object-cover"
       />
       <div className="flex flex-col">
+        {/* PROFILE NAME */}
         <h3 className="font-semibold">{item.name}</h3>
-        <p className="text-xs text-gray-500">{item?.email}</p>
+        {/* CLASS */}
+        <p className="text-xs text-gray-500">{item.class.name}</p>
       </div>
     </td>
-    <td className="hidden md:table-cell">{item.studentId}</td>
-    <td className="hidden md:table-cell">{item.grade}</td>
-    <td className="hidden md:table-cell">{item.class}</td>
+    {/* USERNAME OR ID */}
+    <td className="hidden md:table-cell">{item.username}</td>
+    {/* GRADE */}
+    <td className="hidden md:table-cell">{item.class.name[0]}</td>
+    {/* PHONE */}
     <td className="hidden lg:table-cell">{item.phone}</td>
+    {/* ADDRESS */}
     <td className="hidden lg:table-cell">{item.address}</td>
     <td>
       <div className="flex items-center gap-2">
