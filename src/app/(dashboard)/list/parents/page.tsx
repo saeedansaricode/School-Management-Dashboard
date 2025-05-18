@@ -4,17 +4,10 @@ import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { parentsData, role } from "@/lib/data";
 import { ITEM_PER_PAGE } from "@/lib/settings";
-import { Prisma } from "@prisma/client";
+import { Parent, Prisma, Student } from "@prisma/client";
 import Image from "next/image";
 
-type Parent = {
-  id: number;
-  name: string;
-  students: string[];
-  email?: string;
-  phone: string;
-  address: string;
-};
+type ParentList = Parent & {student: Student[]}
 
 const columns = [
   {
