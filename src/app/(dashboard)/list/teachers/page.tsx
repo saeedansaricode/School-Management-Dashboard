@@ -122,6 +122,7 @@ async function TeacherListPage({
 
   const [data, count] = await prisma.$transaction([
     prisma.teacher.findMany({
+      where: query,
       include: {
         subjects: true,
         classes: true,
@@ -133,7 +134,7 @@ async function TeacherListPage({
     }),
 
     // GET ALL DATA LENGTH
-    prisma.teacher.count(),
+    prisma.teacher.count({ where: query }),
   ]);
 
   return (
