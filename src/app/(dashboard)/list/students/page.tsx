@@ -4,21 +4,11 @@ import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { role, studentsData } from "@/lib/data";
 import { ITEM_PER_PAGE } from "@/lib/settings";
-import { Prisma } from "@prisma/client";
+import { Class, Prisma, Student } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
-type Student = {
-  id: number;
-  studentId: string;
-  name: string;
-  email: string;
-  photo: string;
-  phone?: string;
-  grade: number;
-  class: string;
-  address: string;
-};
+type StudentList = Student & {class: Class}
 
 const columns = [
   {
@@ -56,7 +46,7 @@ const columns = [
   },
 ];
 
-const renderRow = (item: Student) => (
+const renderRow = (item: StudentList) => (
   <tr
     key={item.id}
     className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-schoolLightPurple dark:bg-medium dark:hover:bg-dark"
