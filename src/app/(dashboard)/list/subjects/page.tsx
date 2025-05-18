@@ -3,6 +3,8 @@ import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { role, subjectsData } from "@/lib/data";
+import { ITEM_PER_PAGE } from "@/lib/settings";
+import { Prisma } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -61,7 +63,7 @@ async function SubjectListPage ({
   const p = page ? parseInt(page) : 1;
 
   // URL PARAMS CONDITION
-  const query: Prisma.ParentWhereInput = {};
+  const query: Prisma.SubjectWhereInput = {};
   if (queryParams) {
     for (const [key, value] of Object.entries(queryParams)) {
       if (value !== undefined) {
@@ -77,10 +79,10 @@ async function SubjectListPage ({
   }
 
   const [data, count] = await prisma.$transaction([
-    prisma.parent.findMany({
+    prisma.subject.findMany({
       where: query,
       include: {
-        students: true,
+        teachers: true,
       },
 
       // DATA FETCHING OPTIMIZATION
@@ -89,7 +91,7 @@ async function SubjectListPage ({
     }),
 
     // GET ALL DATA LENGTH
-    prisma.parent.count({ where: query }),
+    prisma.subject.count({ where: query }),
   ]);
 
   return (
