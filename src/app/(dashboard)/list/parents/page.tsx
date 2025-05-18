@@ -3,8 +3,9 @@ import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { parentsData, role } from "@/lib/data";
+import { ITEM_PER_PAGE } from "@/lib/settings";
+import { Prisma } from "@prisma/client";
 import Image from "next/image";
-import Link from "next/link";
 
 type Parent = {
   id: number;
@@ -67,7 +68,7 @@ const renderRow = (item: Parent) => (
     </td>
   </tr>
 );
-async function ParentListPage ({
+async function ParentListPage({
   searchParams,
 }: {
   searchParams: { [key: string]: string | undefined };
@@ -77,32 +78,26 @@ async function ParentListPage ({
   const p = page ? parseInt(page) : 1;
 
   // URL PARAMS CONDITION
-  const query: Prisma.StudentWhereInput = {};
+  const query: Prisma.ParentWhereInput = {};
   if (queryParams) {
     for (const [key, value] of Object.entries(queryParams)) {
       if (value !== undefined) {
         switch (key) {
-          case "teacherId":
-            query.class = {
-              lessons: {
-                some: {
-                  teacherId: value,
-                },
-              },
-            };
-            break;
           case "search":
             query.name = { contains: value, mode: "insensitive" };
+            break;
+          default:
+            break;
         }
       }
     }
   }
 
   const [data, count] = await prisma.$transaction([
-    prisma.student.findMany({
+    prisma.parent.findMany({
       where: query,
       include: {
-        class: true,
+        students: true,
       },
 
       // DATA FETCHING OPTIMIZATION
@@ -111,7 +106,7 @@ async function ParentListPage ({
     }),
 
     // GET ALL DATA LENGTH
-    prisma.student.count({ where: query }),
+    prisma.parent.count({ where: query }),
   ]);
 
   return (
@@ -132,9 +127,7 @@ async function ParentListPage ({
             <button className="w-8 h-8 flex items-center justify-center rounded-full bg-schoolYellow">
               <Image src="/sort.png" alt="sort" width={14} height={14} />
             </button>
-            {role === "admin" && (
-             <FormModal table="Parent" type="create"/>
-            )}
+            {role === "admin" && <FormModal table="Parent" type="create" />}
           </div>
         </div>
       </div>
@@ -146,6 +139,6 @@ async function ParentListPage ({
       <Pagination />
     </div>
   );
-};
+}
 
 export default ParentListPage;
