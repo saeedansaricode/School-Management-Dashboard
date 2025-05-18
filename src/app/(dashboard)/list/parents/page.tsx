@@ -126,10 +126,10 @@ async function ParentListPage({
       </div>
 
       {/* LIST */}
-      <Table columns={columns} renderRow={renderRow} data={parentsData} />
+      <Table columns={columns} renderRow={renderRow} data={data} />
 
       {/* PAGINATION */}
-      <Pagination />
+      <Pagination page={p} count={count}/>
     </div>
   );
 }
