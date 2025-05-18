@@ -6,7 +6,7 @@ import { role, studentsData } from "@/lib/data";
 import Image from "next/image";
 import Link from "next/link";
 
-type Studen = {
+type Student = {
   id: number;
   studentId: string;
   name: string;
@@ -55,7 +55,7 @@ const columns = [
 ];
 
 const StudentListPage = () => {
-  const renderRow = (item: Studen) => (
+  const renderRow = (item: Student) => (
     <tr
       key={item.id}
       className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-schoolLightPurple dark:bg-medium dark:hover:bg-dark"
@@ -80,7 +80,7 @@ const StudentListPage = () => {
       <td className="hidden lg:table-cell">{item.address}</td>
       <td>
         <div className="flex items-center gap-2">
-          <Link href={`/list/teachers/${item.id}`}>
+          <Link href={`/list/students/${item.id}`}>
             <button className="w-7 h-7 flex items-center justify-center bg-schoolBlue rounded-full">
               <Image src="/view.png" alt="view" width={16} height={16} />
             </button>
