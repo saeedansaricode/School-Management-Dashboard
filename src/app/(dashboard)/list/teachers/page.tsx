@@ -115,6 +115,8 @@ async function TeacherListPage({
               },
             };
             break;
+          case "search":
+            query.name = {contains: value, mode: "insensitive"};
         }
       }
     }
