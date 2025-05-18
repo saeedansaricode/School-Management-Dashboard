@@ -7,7 +7,7 @@ import { ITEM_PER_PAGE } from "@/lib/settings";
 import { Class, Prisma, Teacher } from "@prisma/client";
 import Image from "next/image";
 
-type ClassList = Class & {supervisors: Teacher};
+type ClassList = Class & {supervisor: Teacher};
 
 const columns = [
   {
