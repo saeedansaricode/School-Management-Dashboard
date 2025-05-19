@@ -4,16 +4,11 @@ import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { role } from "@/lib/data";
 import { ITEM_PER_PAGE } from "@/lib/settings";
-import { Prisma } from "@prisma/client";
+import { Class, Lesson, Prisma, Subject, Teacher } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
-type Lesson = {
-  id: number;
-  subject: string;
-  class: string;
-  teacher: string;
-};
+type LessonList = Lesson & {teacher: Teacher} & {class: Class} & {subject: Subject}
 
 const columns = [
   {
