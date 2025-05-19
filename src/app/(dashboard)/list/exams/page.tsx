@@ -84,12 +84,12 @@ async function ExamListPage({
         switch (key) {
           // FOR SINGLE STUDENT PAGE
           case "classId":
-            query.classId = parseInt(value);
+            query.lesson = { classId : parseInt(value) }
             break;
 
           // FOR SINGLE TEACHER PAGE
           case "teacherId":
-            query.teacherId = value;
+            query.lesson = { teacherId : value }
             break;
 
           // SEARCHING PARAMS
