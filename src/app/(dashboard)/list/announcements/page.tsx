@@ -3,6 +3,7 @@ import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { announcementsData, role } from "@/lib/data";
+import { Prisma } from "@prisma/client";
 import Image from "next/image";
 
 type Announcement = {
@@ -68,7 +69,7 @@ async function AnnouncementListPage ({
   const p = page ? parseInt(page) : 1;
 
   // URL PARAMS CONDITION
-  const query: Prisma.EventWhereInput = {};
+  const query: Prisma.AnnouncementWhereInput = {};
   if (queryParams) {
     for (const [key, value] of Object.entries(queryParams)) {
       if (value !== undefined) {
