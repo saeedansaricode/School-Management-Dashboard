@@ -3,6 +3,8 @@ import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { examsData, role } from "@/lib/data";
+import { ITEM_PER_PAGE } from "@/lib/settings";
+import { Prisma } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -65,7 +67,7 @@ const renderRow = (item: Exam) => (
     </td>
   </tr>
 );
-async function ExamListPage ({
+async function ExamListPage({
   searchParams,
 }: {
   searchParams: { [key: string]: string | undefined };
@@ -75,7 +77,7 @@ async function ExamListPage ({
   const p = page ? parseInt(page) : 1;
 
   // URL PARAMS CONDITION
-  const query: Prisma.LessonWhereInput = {};
+  const query: Prisma.ExamWhereInput = {};
   if (queryParams) {
     for (const [key, value] of Object.entries(queryParams)) {
       if (value !== undefined) {
@@ -85,17 +87,16 @@ async function ExamListPage ({
             query.classId = parseInt(value);
             break;
 
-            // FOR SINGLE TEACHER PAGE
-            case "teacherId":
+          // FOR SINGLE TEACHER PAGE
+          case "teacherId":
             query.teacherId = value;
             break;
 
-            // SEARCHING PARAMS
+          // SEARCHING PARAMS
           case "search":
-            query.OR = [
-              { subject: { name: {contains: value, mode: "insensitive"} }  },
-              { teacher: { name: {contains: value, mode: "insensitive"} }  },
-            ]
+            query.lesson = {
+              subject: { name: { contains: value, mode: "insensitive" } },
+            };
             break;
           default:
             break;
@@ -105,12 +106,16 @@ async function ExamListPage ({
   }
 
   const [data, count] = await prisma.$transaction([
-    prisma.lesson.findMany({
+    prisma.exam.findMany({
       where: query,
       include: {
-        subject: { select: { name: true } },
-        class: { select: { name: true } },
-        teacher: { select: { name: true, surname: true } },
+        lesson: {
+          select: {
+            subject: { select: { name: true } },
+            class: { select: { name: true } },
+            teacher: { select: { name: true, surname: true } },
+          },
+        },
       },
 
       // DATA FETCHING OPTIMIZATION
@@ -119,7 +124,7 @@ async function ExamListPage ({
     }),
 
     // GET ALL DATA LENGTH
-    prisma.lesson.count({ where: query }),
+    prisma.exam.count({ where: query }),
   ]);
   return (
     <div className="flex flex-col p-4 bg-white dark:bg-medium rounded-lg m-4 mt-0">
@@ -151,6 +156,6 @@ async function ExamListPage ({
       <Pagination />
     </div>
   );
-};
+}
 
 export default ExamListPage;
