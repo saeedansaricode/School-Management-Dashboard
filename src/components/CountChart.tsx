@@ -27,7 +27,7 @@ const data = [
   },
 ];
 
-function CountChart () {
+function CountChart ({boys, girls}: {boys: number, girls: number}) {
 
 
   return (
