@@ -4,7 +4,7 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 
 
-async function UserCart() {
+async function UserCart({type}: {type: "teacher" | "student" | "parent" | "event"}) {
   
   // FETCH DATA
   const models: Record<typeof type, any> = {
