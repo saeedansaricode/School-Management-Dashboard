@@ -8,16 +8,17 @@ import { Prisma } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
-type Result = {
-  id: number;
-  subject: string;
-  class: string;
-  teacher: string;
-  student: string;
-  date: string;
-  score: number;
-  type: "exam" | "assignment";
-};
+type ResultList = {
+        id: number,
+        title: string,
+        studentName: string,
+        studentSurname: string,
+        teacherName: string,
+        teacherSurname: string,
+        score: number,
+        className: string,
+        startTime: Date,
+      }
 
 const columns = [
   {
