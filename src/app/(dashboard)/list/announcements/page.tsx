@@ -4,15 +4,10 @@ import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { announcementsData, role } from "@/lib/data";
 import { ITEM_PER_PAGE } from "@/lib/settings";
-import { Prisma } from "@prisma/client";
+import { Announcement, Class, Prisma } from "@prisma/client";
 import Image from "next/image";
 
-type Announcement = {
-  id: number;
-  title: string;
-  class: string;
-  date: string;
-};
+type AnnouncementList = Announcement & {class: Class}
 
 const columns = [
   {
