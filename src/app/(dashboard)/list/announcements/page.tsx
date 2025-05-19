@@ -41,8 +41,8 @@ const renderRow = (item: AnnouncementList) => (
         <h3 className="font-semibold">{item.title}</h3>
       </div>
     </td>
-    <td className="hidden sm:table-cell">{item.class}</td>
-    <td className="hidden md:table-cell">{item.date}</td>
+    <td className="hidden sm:table-cell">{item.class.name}</td>
+    <td className="hidden md:table-cell">{new Intl.DateTimeFormat("en-US").format(item.date)}</td>
     <td>
       <div className="flex items-center gap-2">
         {role === "admin" && (
