@@ -31,7 +31,7 @@ const columns = [
 ];
 
 
-const renderRow = (item: Announcement) => (
+const renderRow = (item: AnnouncementList) => (
   <tr
     key={item.id}
     className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-schoolLightPurple dark:bg-medium dark:hover:bg-dark"
