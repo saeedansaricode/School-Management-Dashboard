@@ -19,8 +19,8 @@ type Result = {
 
 const columns = [
   {
-    header: "Subject Name",
-    accessor: "subject",
+    header: "Title",
+    accessor: "title",
   },
   {
     header: "Student",
