@@ -8,7 +8,7 @@ import { Class, Event, Prisma } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
-type EventList = Event & {class: Class}
+type EventList = Event & { class: Class };
 
 const columns = [
   {
@@ -51,10 +51,22 @@ const renderRow = (item: EventList) => (
         <h3 className="font-semibold">{item.title}</h3>
       </div>
     </td>
-    <td className="hidden md:table-cell">{item.class}</td>
-    <td className="hidden md:table-cell">{item.date}</td>
-    <td className="hidden lg:table-cell">{item.startTime}</td>
-    <td className="hidden lg:table-cell">{item.endTime}</td>
+    <td className="hidden md:table-cell">{item.class.name}</td>
+    <td className="hidden md:table-cell">
+      {new Intl.DateTimeFormat("en-US").format(item.startTime)}
+    </td>
+    <td className="hidden lg:table-cell">
+      {item.startTime.toLocaleTimeString("en-Us", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      })}
+    </td>
+    <td className="hidden lg:table-cell">{item.endTime.toLocaleTimeString("en-Us", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      })}</td>
     <td>
       <div className="flex items-center gap-2">
         {role === "admin" && (
@@ -67,7 +79,7 @@ const renderRow = (item: EventList) => (
     </td>
   </tr>
 );
-async function EventListPage ({
+async function EventListPage({
   searchParams,
 }: {
   searchParams: { [key: string]: string | undefined };
@@ -84,7 +96,7 @@ async function EventListPage ({
         switch (key) {
           // SEARCHING PARAMS
           case "search":
-            query.title = { contains: value, mode: "insensitive" }
+            query.title = { contains: value, mode: "insensitive" };
             break;
           default:
             break;
@@ -97,7 +109,7 @@ async function EventListPage ({
     prisma.event.findMany({
       where: query,
       include: {
-        class: true
+        class: true,
       },
 
       // DATA FETCHING OPTIMIZATION
@@ -135,9 +147,9 @@ async function EventListPage ({
       <Table columns={columns} renderRow={renderRow} data={data} />
 
       {/* PAGINATION */}
-      <Pagination page={p} count={count}/>
+      <Pagination page={p} count={count} />
     </div>
   );
-};
+}
 
 export default EventListPage;
