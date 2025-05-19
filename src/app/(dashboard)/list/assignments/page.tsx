@@ -40,32 +40,32 @@ const columns = [
   },
 ];
 
-const AssignmentListPage = () => {
-  const renderRow = (item: Assignment) => (
-    <tr
-      key={item.id}
-      className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-schoolLightPurple dark:bg-medium dark:hover:bg-dark"
-    >
-      <td className="flex items-center gap-4 p-4">
-        <div className="flex flex-col">
-          <h3 className="font-semibold">{item.subject}</h3>
-        </div>
-      </td>
-      <td className="hidden md:table-cell">{item.class}</td>
-      <td className="hidden lg:table-cell">{item.teacher}</td>
-      <td className="hidden lg:table-cell">{item.dueDate}</td>
-      <td>
-        <div className="flex items-center gap-2">
-          {role === "admin" && (
-            <>
-              <FormModal table="Assignment" type="update" data={item} />
-              <FormModal table="Assignment" type="delete" id={item.id} />
-            </>
-          )}
-        </div>
-      </td>
-    </tr>
-  );
+const renderRow = (item: Assignment) => (
+  <tr
+    key={item.id}
+    className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-schoolLightPurple dark:bg-medium dark:hover:bg-dark"
+  >
+    <td className="flex items-center gap-4 p-4">
+      <div className="flex flex-col">
+        <h3 className="font-semibold">{item.subject}</h3>
+      </div>
+    </td>
+    <td className="hidden md:table-cell">{item.class}</td>
+    <td className="hidden lg:table-cell">{item.teacher}</td>
+    <td className="hidden lg:table-cell">{item.dueDate}</td>
+    <td>
+      <div className="flex items-center gap-2">
+        {role === "admin" && (
+          <>
+            <FormModal table="Assignment" type="update" data={item} />
+            <FormModal table="Assignment" type="delete" id={item.id} />
+          </>
+        )}
+      </div>
+    </td>
+  </tr>
+);
+async function AssignmentListPage () {
 
   return (
     <div className="flex flex-col p-4 bg-white rounded-lg m-4 mt-0  dark:bg-medium">

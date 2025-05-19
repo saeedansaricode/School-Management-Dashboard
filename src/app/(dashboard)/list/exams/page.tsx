@@ -65,7 +65,7 @@ const renderRow = (item: ExamList) => (
     </td>
   </tr>
 );
-async function ExamListPage({
+async function ExamListPage ({
   searchParams,
 }: {
   searchParams: { [key: string]: string | undefined };
