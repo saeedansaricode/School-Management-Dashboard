@@ -3,6 +3,8 @@ import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { assignmentsData, role } from "@/lib/data";
+import { ITEM_PER_PAGE } from "@/lib/settings";
+import { Prisma } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -75,7 +77,7 @@ async function AssignmentListPage ({
   const p = page ? parseInt(page) : 1;
 
   // URL PARAMS CONDITION
-  const query: Prisma.ExamWhereInput = {};
+  const query: Prisma.AssignmentWhereInput = {};
   if (queryParams) {
     for (const [key, value] of Object.entries(queryParams)) {
       if (value !== undefined) {
@@ -104,7 +106,7 @@ async function AssignmentListPage ({
   }
 
   const [data, count] = await prisma.$transaction([
-    prisma.exam.findMany({
+    prisma.assignment.findMany({
       where: query,
       include: {
         lesson: {
@@ -122,9 +124,9 @@ async function AssignmentListPage ({
     }),
 
     // GET ALL DATA LENGTH
-    prisma.exam.count({ where: query }),
+    prisma.assignment.count({ where: query }),
   ]);
-  
+
   return (
     <div className="flex flex-col p-4 bg-white rounded-lg m-4 mt-0  dark:bg-medium">
       {/* HEADER */}
