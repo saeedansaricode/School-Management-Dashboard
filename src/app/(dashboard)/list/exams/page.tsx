@@ -47,12 +47,12 @@ const renderRow = (item: ExamList) => (
   >
     <td className="flex items-center gap-4 p-4">
       <div className="flex flex-col">
-        <h3 className="font-semibold">{item.subject}</h3>
+        <h3 className="font-semibold">{item.lesson.subject.name}</h3>
       </div>
     </td>
-    <td className="hidden md:table-cell">{item.class}</td>
-    <td className="hidden lg:table-cell">{item.teacher}</td>
-    <td className="hidden lg:table-cell">{item.date}</td>
+    <td className="hidden md:table-cell">{item.lesson.class.name}</td>
+    <td className="hidden lg:table-cell">{item.lesson.teacher.name + " " + item.lesson.teacher.surname}</td>
+    <td className="hidden lg:table-cell">{new Intl.DateTimeFormat("en-US").format(item.startTime)}</td>
     <td>
       <div className="flex items-center gap-2">
         {role === "admin" && (
