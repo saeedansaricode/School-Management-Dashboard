@@ -22,7 +22,7 @@ async function CountChartContainer() {
         </Link>
       </div>
       {/* CHART */}
-      <CountChart />
+      <CountChart boys={boys} girls={girls} />
       {/* BOTTOM */}
       <div className="flex justify-center gap-16">
         <div className="flex flex-col gap-1">
