@@ -6,29 +6,7 @@ import Events from "@/components/Events";
 import FinanceChart from "@/components/FinanceChart";
 import UserCart from "@/components/UserCart";
 
-const AdminPage = () => {
-  const users = [
-    {
-      type: "Teacher",
-      url: "http://localhost:4000/teachersData",
-      href: "/list/teachers",
-    },
-    {
-      type: "Student",
-      url: "http://localhost:4000/studentsData",
-      href: "/list/students",
-    },
-    {
-      type: "Parent",
-      url: "http://localhost:4000/parentsData",
-      href: "/list/parents",
-    },
-    {
-      type: "Event",
-      url: "http://localhost:4000/eventsData",
-      href: "/list/events",
-    },
-  ];
+function AdminPage () {
 
   return (
     <div className="flex flex-col md:flex-row p-4 gap-4">
@@ -36,15 +14,10 @@ const AdminPage = () => {
       <div className="w-full lg:w-2/3 flex flex-col gap-6">
         {/* USER CART */}
         <div className="flex justify-between gap-4 flex-wrap">
-          {users.map((user) => (
-            <UserCart
-              key={user.type}
-              type={user.type}
-              apiUrl={user.url}
-              href={user.href}
-            />
-          ))}
-          {/* <UserCart type={users.teacher.type} apiUrl={users.teacher.apiUrl} /> */}
+          <UserCart type={"teacher"} url={"/list/teachers"} />
+          <UserCart type="student" url={"/list/students"} />
+          <UserCart type="parent" url={"/list/parents"} />
+          <UserCart type="event" url={"/list/events"} />
         </div>
         {/* MIDDLE CHARTS */}
         <div className="flex justify-between gap-4 flex-col lg:flex-row">
@@ -79,7 +52,6 @@ const AdminPage = () => {
         <div className="w-full">
           <Announcements />
         </div>
-
       </div>
     </div>
   );
