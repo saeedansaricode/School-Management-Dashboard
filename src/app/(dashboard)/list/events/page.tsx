@@ -3,6 +3,8 @@ import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { eventsData, role } from "@/lib/data";
+import { ITEM_PER_PAGE } from "@/lib/settings";
+import { Prisma } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -111,16 +113,10 @@ async function EventListPage ({
   }
 
   const [data, count] = await prisma.$transaction([
-    prisma.exam.findMany({
+    prisma.event.findMany({
       where: query,
       include: {
-        lesson: {
-          select: {
-            subject: { select: { name: true } },
-            class: { select: { name: true } },
-            teacher: { select: { name: true, surname: true } },
-          },
-        },
+        class: true
       },
 
       // DATA FETCHING OPTIMIZATION
@@ -129,7 +125,7 @@ async function EventListPage ({
     }),
 
     // GET ALL DATA LENGTH
-    prisma.exam.count({ where: query }),
+    prisma.event.count({ where: query }),
   ]);
   return (
     <div className="flex flex-col p-4 bg-white rounded-lg m-4 mt-0  dark:bg-medium">
