@@ -57,7 +57,49 @@ const renderRow = (item: Lesson) => (
     </td>
   </tr>
 );
-async function LessonListPage () {
+async function LessonListPage  ({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined };
+}) {
+  // GET SEARCHPARAMS AND CALCULATING PAGENUMBER INFO
+  const { page, ...queryParams } = await searchParams;
+  const p = page ? parseInt(page) : 1;
+
+  // URL PARAMS CONDITION
+  const query: Prisma.ClassWhereInput = {};
+  if (queryParams) {
+    for (const [key, value] of Object.entries(queryParams)) {
+      if (value !== undefined) {
+        switch (key) {
+          case "supervisorId":
+            query.supervisorId = value;
+            break;
+          case "search":
+            query.name = { contains: value, mode: "insensitive" };
+            break;
+          default:
+            break;
+        }
+      }
+    }
+  }
+
+  const [data, count] = await prisma.$transaction([
+    prisma.class.findMany({
+      where: query,
+      include: {
+        supervisor: true,
+      },
+
+      // DATA FETCHING OPTIMIZATION
+      take: ITEM_PER_PAGE,
+      skip: ITEM_PER_PAGE * (p - 1),
+    }),
+
+    // GET ALL DATA LENGTH
+    prisma.class.count({ where: query }),
+  ]);
 
   return (
     <div className="flex flex-col p-4 bg-white rounded-lg m-4 mt-0  dark:bg-medium">
