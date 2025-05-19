@@ -69,9 +69,16 @@ async function LessonListPage  ({
     for (const [key, value] of Object.entries(queryParams)) {
       if (value !== undefined) {
         switch (key) {
-          case "teacherId":
+          // FOR SINGLE STUDENT PAGE
+          case "classId":
+            query.classId = parseInt(value);
+            break;
+
+            // FOR SINGLE TEACHER PAGE
+            case "teacherId":
             query.teacherId = value;
             break;
+            
           case "search":
             query.name = { contains: value, mode: "insensitive" };
             break;
