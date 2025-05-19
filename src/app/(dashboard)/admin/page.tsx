@@ -1,6 +1,6 @@
 import Announcements from "@/components/Announcements";
 import AttendanceChart from "@/components/AttendanceCart";
-import CountChart from "@/components/CountChart";
+import CountChartContainer from "@/components/CountChartContainer";
 import EventCalender from "@/components/EventCalender";
 import Events from "@/components/Events";
 import FinanceChart from "@/components/FinanceChart";
@@ -23,7 +23,7 @@ function AdminPage () {
         <div className="flex justify-between gap-4 flex-col lg:flex-row">
           {/* COUNT CHART */}
           <div className="w-full lg:w-1/3 h-[350px]">
-            <CountChart />
+            <CountChartContainer />
           </div>
           {/* ATTENDANCE CHART */}
           <div className="w-full lg:w-2/3 h-[350px]">
