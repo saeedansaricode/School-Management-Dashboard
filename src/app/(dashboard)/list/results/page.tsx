@@ -3,24 +3,27 @@ import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { resultsData, role } from "@/lib/data";
+import { ITEM_PER_PAGE } from "@/lib/settings";
+import { Prisma } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
-type Result = {
-  id: number;
-  subject: string;
-  class: string;
-  teacher: string;
-  student: string;
-  date: string;
-  score: number;
-  type: "exam" | "assignment";
-};
+type ResultList = {
+        id: number,
+        title: string,
+        studentName: string,
+        studentSurname: string,
+        teacherName: string,
+        teacherSurname: string,
+        score: number,
+        className: string,
+        startTime: Date,
+      }
 
 const columns = [
   {
-    header: "Subject Name",
-    accessor: "subject",
+    header: "Title",
+    accessor: "title",
   },
   {
     header: "Student",
@@ -52,34 +55,120 @@ const columns = [
   },
 ];
 
-const ResultListPage = () => {
-  const renderRow = (item: Result) => (
-    <tr
-      key={item.id}
-      className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-schoolLightPurple dark:bg-medium dark:hover:bg-dark"
-    >
-      <td className="flex items-center gap-4 p-4">
-        <div className="flex flex-col">
-          <h3 className="font-semibold">{item.subject}</h3>
-        </div>
-      </td>
-      <td>{item.student}</td>
-      <td className="hidden md:table-cell">{item.score}</td>
-      <td className="hidden md:table-cell">{item.teacher}</td>
-      <td className="hidden lg:table-cell">{item.class}</td>
-      <td className="hidden lg:table-cell">{item.date}</td>
-      <td>
-        <div className="flex items-center gap-2">
-          {role === "admin" && (
-            <>
-              <FormModal table="Result" type="update" data={item} />
-              <FormModal table="Result" type="delete" id={item.id} />
-            </>
-          )}
-        </div>
-      </td>
-    </tr>
-  );
+const renderRow = (item: ResultList) => (
+  <tr
+    key={item.id}
+    className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-schoolLightPurple dark:bg-medium dark:hover:bg-dark"
+  >
+    <td className="flex items-center gap-4 p-4">
+      <div className="flex flex-col">
+        <h3 className="font-semibold">{item.title}</h3>
+      </div>
+    </td>
+    <td>{item.studentName + " " + item.studentSurname}</td>
+    <td className="hidden md:table-cell">{item.score}</td>
+    <td className="hidden md:table-cell">{item.teacherName + " " + item.teacherSurname}</td>
+    <td className="hidden lg:table-cell">{item.className}</td>
+    <td className="hidden lg:table-cell">{new Intl.DateTimeFormat("en-US").format(item.startTime)}</td>
+    <td>
+      <div className="flex items-center gap-2">
+        {role === "admin" && (
+          <>
+            <FormModal table="Result" type="update" data={item} />
+            <FormModal table="Result" type="delete" id={item.id} />
+          </>
+        )}
+      </div>
+    </td>
+  </tr>
+);
+async function ResultListPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined };
+}) {
+  // GET SEARCHPARAMS AND CALCULATING PAGENUMBER INFO
+  const { page, ...queryParams } = await searchParams;
+  const p = page ? parseInt(page) : 1;
+
+  // URL PARAMS CONDITION
+  const query: Prisma.ResultWhereInput = {};
+  if (queryParams) {
+    for (const [key, value] of Object.entries(queryParams)) {
+      if (value !== undefined) {
+        switch (key) {
+          // FOR SINGLE STUDENT PAGE
+          case "studentId":
+            query.studentId = value;
+            break;
+
+          // SEARCHING PARAMS
+          case "search":
+            query.OR = [
+              { exam: { title: { contains: value, mode: "insensitive" } } },
+              { student: { name: { contains: value, mode: "insensitive" } } },
+            ];
+            break;
+          default:
+            break;
+        }
+      }
+    }
+  }
+
+  const [dataRes, count] = await prisma.$transaction([
+    prisma.result.findMany({
+      where: query,
+      include: {
+        student: { select: { name: true, surname: true } },
+        exam: {
+          include: {
+            lesson: {
+              select: {
+                class: { select: { name: true } },
+                teacher: { select: { name: true, surname: true } },
+              },
+            },
+          },
+        },
+        assignment: {
+          include: {
+            lesson: {
+              select: {
+                class: { select: { name: true } },
+                teacher: { select: { name: true, surname: true } },
+              },
+            },
+          },
+        },
+      },
+
+      // DATA FETCHING OPTIMIZATION
+      take: ITEM_PER_PAGE,
+      skip: ITEM_PER_PAGE * (p - 1),
+    }),
+
+    // GET ALL DATA LENGTH
+    prisma.result.count({ where: query }),
+  ]);
+
+  const data = dataRes.map((item)=>{
+      const assignment = item.assignment || item.exam
+      if (!assignment) return null
+
+      const isExam = "sartTime" in assignment 
+      return {
+        id: item.id,
+        title: assignment.title,
+        studentName: item.student.name,
+        studentSurname: item.student.surname,
+        teacherName: assignment.lesson.teacher.name,
+        teacherSurname: assignment.lesson.teacher.surname,
+        score: item.score,
+        className: assignment.lesson.class.name,
+        startTime: isExam ? assignment.stratTime : assignment.startDate
+      }
+    })
 
   return (
     <div className="flex flex-col p-4 bg-white rounded-lg m-4 mt-0  dark:bg-medium">
@@ -105,12 +194,12 @@ const ResultListPage = () => {
       </div>
 
       {/* LIST */}
-      <Table columns={columns} renderRow={renderRow} data={resultsData} />
+      <Table columns={columns} renderRow={renderRow} data={data} />
 
       {/* PAGINATION */}
-      <Pagination />
+      <Pagination page={p} count={count}/>
     </div>
   );
-};
+}
 
 export default ResultListPage;
