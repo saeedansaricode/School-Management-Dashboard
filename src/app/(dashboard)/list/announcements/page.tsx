@@ -3,6 +3,7 @@ import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { announcementsData, role } from "@/lib/data";
+import { ITEM_PER_PAGE } from "@/lib/settings";
 import { Prisma } from "@prisma/client";
 import Image from "next/image";
 
@@ -86,7 +87,7 @@ async function AnnouncementListPage ({
   }
 
   const [data, count] = await prisma.$transaction([
-    prisma.event.findMany({
+    prisma.announcement.findMany({
       where: query,
       include: {
         class: true,
@@ -98,7 +99,7 @@ async function AnnouncementListPage ({
     }),
 
     // GET ALL DATA LENGTH
-    prisma.event.count({ where: query }),
+    prisma.announcement.count({ where: query }),
   ]);
 
   return (
