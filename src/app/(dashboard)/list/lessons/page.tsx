@@ -69,8 +69,8 @@ async function LessonListPage  ({
     for (const [key, value] of Object.entries(queryParams)) {
       if (value !== undefined) {
         switch (key) {
-          case "supervisorId":
-            query.supervisorId = value;
+          case "teacherId":
+            query.teacherId = value;
             break;
           case "search":
             query.name = { contains: value, mode: "insensitive" };
