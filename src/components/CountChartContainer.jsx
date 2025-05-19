@@ -1,5 +1,14 @@
+import { prisma } from "@/lib/prisma";
 import CountChart from "./CountChart";
-function CountChartContainer() {
+
+async function CountChartContainer() {
+  // FETCH DATA
+  const data = await prisma.student.groupBy({
+    by: ["sex"],
+    _count: true,
+  });
+  console.log(data)
+
   return (
     <div className=" bg-white dark:bg-medium rounded-xl w-full h-full p-4">
       {/* HEADER */}
