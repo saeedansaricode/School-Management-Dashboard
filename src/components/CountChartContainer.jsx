@@ -9,7 +9,8 @@ async function CountChartContainer() {
     by: ["sex"],
     _count: true,
   });
-  console.log(data)
+  const boys = data.find((item) => item.sex === "MALE")?._count || 0;
+  const girls = data.find((item) => item.sex === "FEMALE")?._count || 0;
 
   return (
     <div className=" bg-white dark:bg-medium rounded-xl w-full h-full p-4">
