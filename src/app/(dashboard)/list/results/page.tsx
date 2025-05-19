@@ -3,6 +3,7 @@ import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { resultsData, role } from "@/lib/data";
+import { ITEM_PER_PAGE } from "@/lib/settings";
 import { Prisma } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
@@ -80,7 +81,7 @@ const renderRow = (item: Result) => (
     </td>
   </tr>
 );
-async function ResultListPage ({
+async function ResultListPage({
   searchParams,
 }: {
   searchParams: { [key: string]: string | undefined };
@@ -97,14 +98,14 @@ async function ResultListPage ({
         switch (key) {
           // FOR SINGLE STUDENT PAGE
           case "studentId":
-            query.studentId = value
+            query.studentId = value;
             break;
 
           // SEARCHING PARAMS
           case "search":
             query.OR = [
-              {exam: { title: { contains: value, mode: "insensitive" } } },
-              {student: { name: { contains: value, mode: "insensitive" } } },
+              { exam: { title: { contains: value, mode: "insensitive" } } },
+              { student: { name: { contains: value, mode: "insensitive" } } },
             ];
             break;
           default:
@@ -115,14 +116,28 @@ async function ResultListPage ({
   }
 
   const [data, count] = await prisma.$transaction([
-    prisma.exam.findMany({
+    prisma.result.findMany({
       where: query,
       include: {
-        lesson: {
-          select: {
-            subject: { select: { name: true } },
-            class: { select: { name: true } },
-            teacher: { select: { name: true, surname: true } },
+        student: { select: { name: true, surname: true } },
+        exam: {
+          include: {
+            lesson: {
+              select: {
+                class: { select: { name: true } },
+                teacher: { select: { name: true, surname: true } },
+              },
+            },
+          },
+        },
+        assignment: {
+          include: {
+            lesson: {
+              select: {
+                class: { select: { name: true } },
+                teacher: { select: { name: true, surname: true } },
+              },
+            },
           },
         },
       },
@@ -133,7 +148,7 @@ async function ResultListPage ({
     }),
 
     // GET ALL DATA LENGTH
-    prisma.exam.count({ where: query }),
+    prisma.result.count({ where: query }),
   ]);
 
   return (
@@ -166,7 +181,6 @@ async function ResultListPage ({
       <Pagination />
     </div>
   );
-};
+}
 
 export default ResultListPage;
-
