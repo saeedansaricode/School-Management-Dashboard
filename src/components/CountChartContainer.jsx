@@ -1,5 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import CountChart from "./CountChart";
+import Link from "next/link";
+import Image from "next/image";
 
 async function CountChartContainer() {
   // FETCH DATA
