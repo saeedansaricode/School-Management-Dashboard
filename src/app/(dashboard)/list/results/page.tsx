@@ -115,7 +115,7 @@ async function ResultListPage({
     }
   }
 
-  const [data, count] = await prisma.$transaction([
+  const [dataRes, count] = await prisma.$transaction([
     prisma.result.findMany({
       where: query,
       include: {
@@ -150,6 +150,24 @@ async function ResultListPage({
     // GET ALL DATA LENGTH
     prisma.result.count({ where: query }),
   ]);
+
+  const data = dataRes.map((item)=>{
+      const assignment = item.assignment || item.exam
+      if (!assignment) return null
+
+      const isExam = "sartTime" in assignment 
+      return {
+        id: item.id,
+        title: assignment.title,
+        studentName: item.student.name,
+        studentSurname: item.student.surname,
+        teacherName: assignment.lesson.teacher.name,
+        teacherSurname: assignment.lesson.teacher.surname,
+        score: item.score,
+        className: assignment.lesson.class.name,
+        startTime: isExam ? assignment.stratTime : assignment.startDate
+      }
+    })
 
   return (
     <div className="flex flex-col p-4 bg-white rounded-lg m-4 mt-0  dark:bg-medium">
