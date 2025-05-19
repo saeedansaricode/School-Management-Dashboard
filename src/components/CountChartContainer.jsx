@@ -1,4 +1,4 @@
-
+import CountChart from "./CountChart";
 function CountChartContainer() {
   return (
     <div className=" bg-white dark:bg-medium rounded-xl w-full h-full p-4">
@@ -10,6 +10,7 @@ function CountChartContainer() {
         </Link>
       </div>
       {/* CHART */}
+      <CountChart />
       {/* BOTTOM */}
       <div className="flex justify-center gap-16">
         <div className="flex flex-col gap-1">
