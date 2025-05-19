@@ -3,9 +3,12 @@ import CurrentDate from "./CurrentDate";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 
-
-async function UserCart({type}: {type: "teacher" | "student" | "parent" | "event"}) {
-  
+async function UserCart({
+  type, url
+}: {
+  type: "teacher" | "student" | "parent" | "event";
+  url: string
+}) {
   // FETCH DATA
   const models: Record<typeof type, any> = {
     teacher: prisma.teacher,
@@ -14,7 +17,6 @@ async function UserCart({type}: {type: "teacher" | "student" | "parent" | "event
     event: prisma.event,
   };
   const data = await models[type].count();
-  console.log(data);
 
   return (
     <div className="flex-1 min-w-[130px] p-3 rounded-2xl odd:bg-schoolPurple even:bg-schoolYellow">
@@ -23,7 +25,7 @@ async function UserCart({type}: {type: "teacher" | "student" | "parent" | "event
           <CurrentDate />
         </span>
         <div>
-          <Link href={href}>
+          <Link href={url}>
             <Image
               className=""
               src="/more.png"
@@ -34,7 +36,7 @@ async function UserCart({type}: {type: "teacher" | "student" | "parent" | "event
           </Link>
         </div>
       </div>
-      <h1 className="text-2xl font-semibold my-4">{apiRes ?? 0}</h1>
+      <h1 className="text-2xl font-semibold my-4">{data}</h1>
       <h2 className="capitalize text-sm font-medium text-gray-500">{type}</h2>
     </div>
   );
