@@ -84,26 +84,14 @@ async function EventListPage ({
   const p = page ? parseInt(page) : 1;
 
   // URL PARAMS CONDITION
-  const query: Prisma.ExamWhereInput = {};
+  const query: Prisma.EventWhereInput = {};
   if (queryParams) {
     for (const [key, value] of Object.entries(queryParams)) {
       if (value !== undefined) {
         switch (key) {
-          // FOR SINGLE STUDENT PAGE
-          case "classId":
-            query.lesson = { classId : parseInt(value) }
-            break;
-
-          // FOR SINGLE TEACHER PAGE
-          case "teacherId":
-            query.lesson = { teacherId : value }
-            break;
-
           // SEARCHING PARAMS
           case "search":
-            query.lesson = {
-              subject: { name: { contains: value, mode: "insensitive" } },
-            };
+            query.title = { contains: value, mode: "insensitive" }
             break;
           default:
             break;
