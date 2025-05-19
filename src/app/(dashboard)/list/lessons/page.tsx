@@ -3,6 +3,8 @@ import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { lessonsData, role } from "@/lib/data";
+import { ITEM_PER_PAGE } from "@/lib/settings";
+import { Prisma } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -67,7 +69,7 @@ async function LessonListPage  ({
   const p = page ? parseInt(page) : 1;
 
   // URL PARAMS CONDITION
-  const query: Prisma.ClassWhereInput = {};
+  const query: Prisma.LessonWhereInput = {};
   if (queryParams) {
     for (const [key, value] of Object.entries(queryParams)) {
       if (value !== undefined) {
@@ -86,10 +88,12 @@ async function LessonListPage  ({
   }
 
   const [data, count] = await prisma.$transaction([
-    prisma.class.findMany({
+    prisma.lesson.findMany({
       where: query,
       include: {
-        supervisor: true,
+        subject: { select: { name: true } },
+        class: { select: { name: true } },
+        teacher: { select: { name: true, surname: true } },
       },
 
       // DATA FETCHING OPTIMIZATION
@@ -98,7 +102,7 @@ async function LessonListPage  ({
     }),
 
     // GET ALL DATA LENGTH
-    prisma.class.count({ where: query }),
+    prisma.lesson.count({ where: query }),
   ]);
 
   return (
