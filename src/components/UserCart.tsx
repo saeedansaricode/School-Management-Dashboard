@@ -1,16 +1,20 @@
 import Image from "next/image";
 import CurrentDate from "./CurrentDate";
 import Link from "next/link";
+import { prisma } from "@/lib/prisma";
 
-type usersProps = {
-  type: string;
-  apiUrl: string;
-  href: string;
-};
-async function UserCart({ apiUrl, href, type }: usersProps) {
-  const data = await fetch(apiUrl);
-  const res = await data.json();
-  const apiRes = res.length;
+
+async function UserCart() {
+  
+  // FETCH DATA
+  const models: Record<typeof type, any> = {
+    teacher: prisma.teacher,
+    student: prisma.student,
+    parent: prisma.parent,
+    event: prisma.event,
+  };
+  const data = await models[type].count();
+  console.log(data);
 
   return (
     <div className="flex-1 min-w-[130px] p-3 rounded-2xl odd:bg-schoolPurple even:bg-schoolYellow">
