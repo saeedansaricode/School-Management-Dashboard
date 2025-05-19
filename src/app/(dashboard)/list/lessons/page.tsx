@@ -78,9 +78,13 @@ async function LessonListPage  ({
             case "teacherId":
             query.teacherId = value;
             break;
-            
+
+            // SEARCHING PARAMS
           case "search":
-            query.name = { contains: value, mode: "insensitive" };
+            query.OR = [
+              { subject: { name: {contains: value, mode: "insensitive"} }  },
+              { teacher: { name: {contains: value, mode: "insensitive"} }  },
+            ]
             break;
           default:
             break;
