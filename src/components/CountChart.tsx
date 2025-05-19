@@ -9,26 +9,26 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const data = [
-  {
-    name: "Total",
-    count: 100,
-    fill: "white",
-  },
-  {
-    name: "Girls",
-    count: 40,
-    fill: "#FAE27C",
-  },
-  {
-    name: "Boys",
-    count: 60,
-    fill: "#C3EBFA",
-  },
-];
 
 function CountChart ({boys, girls}: {boys: number, girls: number}) {
-
+  
+  const data = [
+    {
+      name: "Total",
+      count: 100,
+      fill: "white",
+    },
+    {
+      name: "Girls",
+      count: 40,
+      fill: "#FAE27C",
+    },
+    {
+      name: "Boys",
+      count: 60,
+      fill: "#C3EBFA",
+    },
+  ];
 
   return (
     <div className="w-full h-[75%] relative">
