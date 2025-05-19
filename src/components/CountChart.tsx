@@ -15,17 +15,17 @@ function CountChart ({boys, girls}: {boys: number, girls: number}) {
   const data = [
     {
       name: "Total",
-      count: 100,
+      count: boys + girls,
       fill: "white",
     },
     {
       name: "Girls",
-      count: 40,
+      count: girls,
       fill: "#FAE27C",
     },
     {
       name: "Boys",
-      count: 60,
+      count: boys,
       fill: "#C3EBFA",
     },
   ];
