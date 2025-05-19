@@ -65,8 +65,62 @@ const renderRow = (item: Exam) => (
     </td>
   </tr>
 );
-async function ExamListPage () {
+async function ExamListPage ({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined };
+}) {
+  // GET SEARCHPARAMS AND CALCULATING PAGENUMBER INFO
+  const { page, ...queryParams } = await searchParams;
+  const p = page ? parseInt(page) : 1;
 
+  // URL PARAMS CONDITION
+  const query: Prisma.LessonWhereInput = {};
+  if (queryParams) {
+    for (const [key, value] of Object.entries(queryParams)) {
+      if (value !== undefined) {
+        switch (key) {
+          // FOR SINGLE STUDENT PAGE
+          case "classId":
+            query.classId = parseInt(value);
+            break;
+
+            // FOR SINGLE TEACHER PAGE
+            case "teacherId":
+            query.teacherId = value;
+            break;
+
+            // SEARCHING PARAMS
+          case "search":
+            query.OR = [
+              { subject: { name: {contains: value, mode: "insensitive"} }  },
+              { teacher: { name: {contains: value, mode: "insensitive"} }  },
+            ]
+            break;
+          default:
+            break;
+        }
+      }
+    }
+  }
+
+  const [data, count] = await prisma.$transaction([
+    prisma.lesson.findMany({
+      where: query,
+      include: {
+        subject: { select: { name: true } },
+        class: { select: { name: true } },
+        teacher: { select: { name: true, surname: true } },
+      },
+
+      // DATA FETCHING OPTIMIZATION
+      take: ITEM_PER_PAGE,
+      skip: ITEM_PER_PAGE * (p - 1),
+    }),
+
+    // GET ALL DATA LENGTH
+    prisma.lesson.count({ where: query }),
+  ]);
   return (
     <div className="flex flex-col p-4 bg-white dark:bg-medium rounded-lg m-4 mt-0">
       {/* HEADER */}
