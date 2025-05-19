@@ -3,6 +3,7 @@ import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { resultsData, role } from "@/lib/data";
+import { Prisma } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -89,26 +90,22 @@ async function ResultListPage ({
   const p = page ? parseInt(page) : 1;
 
   // URL PARAMS CONDITION
-  const query: Prisma.ExamWhereInput = {};
+  const query: Prisma.ResultWhereInput = {};
   if (queryParams) {
     for (const [key, value] of Object.entries(queryParams)) {
       if (value !== undefined) {
         switch (key) {
           // FOR SINGLE STUDENT PAGE
-          case "classId":
-            query.lesson = { classId : parseInt(value) }
-            break;
-
-          // FOR SINGLE TEACHER PAGE
-          case "teacherId":
-            query.lesson = { teacherId : value }
+          case "studentId":
+            query.studentId = value
             break;
 
           // SEARCHING PARAMS
           case "search":
-            query.lesson = {
-              subject: { name: { contains: value, mode: "insensitive" } },
-            };
+            query.OR = [
+              {exam: { title: { contains: value, mode: "insensitive" } } },
+              {student: { name: { contains: value, mode: "insensitive" } } },
+            ];
             break;
           default:
             break;
