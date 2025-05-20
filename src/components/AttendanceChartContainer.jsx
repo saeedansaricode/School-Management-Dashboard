@@ -3,6 +3,13 @@ import AttendanceChart from "./AttendanceChart";
 import Link from "next/link";
 
 function AttendanceChartContainer() {
+    // GET CURRENT WEEK'S DAYS FROM LAST MONDAY
+    const today = new Date()
+    const dayOfWeek = today.getDay()
+    const daysSinceMonday = dayOfWeek === 0 ? 6 : dayOfWeek - 1
+    const lastMonday = new Date(today)
+    lastMonday.setDate(today.getDate() - daysSinceMonday)
+    
   return (
     <div className=" bg-white dark:bg-medium rounded-xl w-full h-full p-4">
       {/* HEADER */}
