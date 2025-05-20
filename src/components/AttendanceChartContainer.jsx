@@ -49,6 +49,13 @@ async function AttendanceChartContainer() {
     }
   });
 
+  // TRANSFORM attendanceMap
+  const data = daysOfWeek.map((day) => ({
+    name: day,
+    present: attendanceMap[day].present,
+    absent: attendanceMap[day].absent,
+  }));
+
   return (
     <div className=" bg-white dark:bg-medium rounded-xl w-full h-full p-4">
       {/* HEADER */}
