@@ -1,4 +1,6 @@
+import Image from "next/image";
 import AttendanceChart from "./AttendanceChart";
+import Link from "next/link";
 
 function AttendanceChartContainer() {
   return (
