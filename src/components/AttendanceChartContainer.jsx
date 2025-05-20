@@ -24,6 +24,16 @@ async function AttendanceChartContainer() {
     },
   });
 
+  // INITIAL VALUE
+  const daysOfWeek = ["Mon", "Tue", "Wed", "The", "Fri"];
+  const attendanceMap = {
+    Mon: { present: 0, absent: 0 },
+    Tue: { present: 0, absent: 0 },
+    Wed: { present: 0, absent: 0 },
+    The: { present: 0, absent: 0 },
+    Fri: { present: 0, absent: 0 },
+  };
+
   return (
     <div className=" bg-white dark:bg-medium rounded-xl w-full h-full p-4">
       {/* HEADER */}
