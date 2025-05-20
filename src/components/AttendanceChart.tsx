@@ -15,7 +15,11 @@ import {
 
 type Data = { name: string; present: number; absent: number }[]
 
-function AttendanceChart() {
+function AttendanceChart({
+  data,
+}: {
+  data: Data;
+}) {
   return (
     <div className="w-full h-[93%]">
       <ResponsiveContainer>
