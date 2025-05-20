@@ -1,4 +1,4 @@
-import React from "react";
+import AttendanceChart from "./AttendanceChart";
 
 function AttendanceChartContainer() {
   return (
@@ -12,6 +12,7 @@ function AttendanceChartContainer() {
       </div>
 
       {/* CHART */}
+      <AttendanceChart />
     </div>
   );
 }
