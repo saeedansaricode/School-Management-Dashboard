@@ -67,7 +67,7 @@ async function AttendanceChartContainer() {
       </div>
 
       {/* CHART */}
-      <AttendanceChart />
+      <AttendanceChart data={data}/>
     </div>
   );
 }
