@@ -34,6 +34,21 @@ async function AttendanceChartContainer() {
     Fri: { present: 0, absent: 0 },
   };
 
+  // UPDATE FETCHED DATA
+  dataRes.forEach((item) => {
+    const itemDate = new Date(item.date);
+
+    if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+      const dayName = daysOfWeek[dayOfWeek - 1];
+
+      if (item.present) {
+        attendanceMap[dayName].present += 1;
+      } else {
+        attendanceMap[dayName].absent += 1;
+      }
+    }
+  });
+
   return (
     <div className=" bg-white dark:bg-medium rounded-xl w-full h-full p-4">
       {/* HEADER */}
