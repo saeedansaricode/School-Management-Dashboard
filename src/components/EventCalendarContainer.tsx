@@ -1,6 +1,11 @@
 import React from 'react'
 
-function EventCalendarContainer() {
+async function EventCalendarContainer ({
+  searchParams,
+}: {
+  searchParams: { [keys: string]: string | undefined };
+}) {
+    
   return (
     <div>EventCalendarContainer</div>
   )
