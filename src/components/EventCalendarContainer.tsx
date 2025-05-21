@@ -30,7 +30,7 @@ async function EventCalendarContainer({
       <div className="flex flex-col gap-4">
 
         {/* EVENT LIST */}
-        <EventList/>
+        <EventList dateParam={data}/>
       </div>
     </div>
   );
