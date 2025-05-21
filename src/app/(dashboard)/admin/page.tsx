@@ -46,7 +46,7 @@ async function AdminPage ({
       <div className="w-full lg:w-1/3 flex flex-col gap-6">
         {/* EVENT CALENDER */}
         <div className="w-full">
-          <EventCalendarContainer />
+          <EventCalendarContainer searchParams={searchParams}/>
         </div>
         {/* EVENTS */}
         <div className="w-full">
