@@ -6,7 +6,11 @@ import Events from "@/components/Events";
 import FinanceChart from "@/components/FinanceChart";
 import UserCart from "@/components/UserCart";
 
-function AdminPage () {
+async function AdminPage ({
+  searchParams,
+}: {
+  searchParams: { [keys: string]: string | undefined };
+}) {
 
   return (
     <div className="flex flex-col md:flex-row p-4 gap-4">
