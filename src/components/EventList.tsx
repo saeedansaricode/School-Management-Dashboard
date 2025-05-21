@@ -1,6 +1,6 @@
 import React from 'react'
 
-function EventList() {
+function EventList({dateParam} : {dateParam : string | undefined}) {
   return (
     <div>EventList</div>
   )
