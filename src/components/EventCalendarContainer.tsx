@@ -1,14 +1,13 @@
-import React from 'react'
+import React from "react";
 
-async function EventCalendarContainer ({
+async function EventCalendarContainer({
   searchParams,
 }: {
   searchParams: { [keys: string]: string | undefined };
 }) {
-    
-  return (
-    <div>EventCalendarContainer</div>
-  )
+  // GET SEARCH PARAMS AS DATA
+  const { data } = await searchParams;
+  return <div>EventCalendarContainer</div>;
 }
 
-export default EventCalendarContainer
+export default EventCalendarContainer;
