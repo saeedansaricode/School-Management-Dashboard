@@ -12,7 +12,7 @@ async function EventCalendarContainer({
   const { data } = await searchParams;
   return (
     // CONTAINAR ( CALENDAR + EVENTS )
-    <div className="bg-white dark:bg-medium p-4 rounded-md">
+    <div className="bg-white dark:bg-medium p-4 rounded-xl">
       {/* CALENDAR */}
 
       {/* EVENT */}
@@ -22,7 +22,7 @@ async function EventCalendarContainer({
 
         {/* ALL EVENTS */}
         <Link href="/list/events">
-          <Image src="/moreDark.png" alt="" width={20} height={20} />
+          <span className="text-xs text-gray-300">View All</span>
         </Link>
       </div>
 
