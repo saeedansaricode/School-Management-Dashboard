@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import EventList from "./EventList";
 
 async function EventCalendarContainer({
   searchParams,
@@ -29,6 +30,7 @@ async function EventCalendarContainer({
       <div className="flex flex-col gap-4">
 
         {/* EVENT LIST */}
+        <EventList/>
       </div>
     </div>
   );
