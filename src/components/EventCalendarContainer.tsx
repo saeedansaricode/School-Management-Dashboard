@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import EventList from "./EventList";
+import EventCalendar from "./EventCalendar";
 
 async function EventCalendarContainer({
   searchParams,
@@ -14,6 +15,7 @@ async function EventCalendarContainer({
     // CONTAINAR ( CALENDAR + EVENTS )
     <div className="bg-white dark:bg-medium p-4 rounded-xl">
       {/* CALENDAR */}
+      <EventCalendar/>
 
       {/* EVENT */}
       {/* HEADER */}
