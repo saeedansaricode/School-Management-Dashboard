@@ -12,6 +12,13 @@ async function EventList({ dateParam }: { dateParam: string | undefined }) {
       },
     },
   });
+    if (data.length === 0) {
+    return (
+      <div className="text-center mt-2 text-gray-400 text-sm">
+        There are no Events for today.
+      </div>
+    );
+  }
   return data.map((event) => (
     <div
       className="p-5 rounded-md border-2 border-gray-100 border-t-4 odd:border-t-schoolBlue even:border-t-schoolPurple"
