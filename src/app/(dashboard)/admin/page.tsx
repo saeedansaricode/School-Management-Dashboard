@@ -2,7 +2,6 @@ import Announcements from "@/components/Announcements";
 import AttendanceChartContainer from "@/components/AttendanceChartContainer";
 import CountChartContainer from "@/components/CountChartContainer";
 import EventCalendarContainer from "@/components/EventCalendarContainer";
-import Events from "@/components/Events";
 import FinanceChart from "@/components/FinanceChart";
 import UserCart from "@/components/UserCart";
 
@@ -47,10 +46,6 @@ async function AdminPage ({
         {/* EVENT CALENDER */}
         <div className="w-full">
           <EventCalendarContainer searchParams={searchParams}/>
-        </div>
-        {/* EVENTS */}
-        <div className="w-full">
-          <Events />
         </div>
         {/* ANNOUNCEMENT */}
         <div className="w-full">
