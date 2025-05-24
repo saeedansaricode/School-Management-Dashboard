@@ -20,7 +20,7 @@ function EventCalendar() {
 
   
   return (
-    <div className="bg-white dark:bg-medium rounded-xl p-4">
+    <div className="bg-white dark:bg-medium rounded-xl">
       {/* CALENDER */}
       <div className="flex justify-center items-center dark:text-dark">
         <Calendar onChange={onChange} value={value} />
