@@ -2,18 +2,13 @@ import FormModal from "@/components/FormModal";
 import Pagination from "@/components/Pagination";
 import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
-import { eventsData, role } from "@/lib/data";
+import { role } from "@/lib/data";
+import { ITEM_PER_PAGE } from "@/lib/settings";
+import { Class, Event, Prisma } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
-type Event = {
-  id: number;
-  title: string;
-  class: string;
-  date: string;
-  startTime: string;
-  endTime: string;
-};
+type EventList = Event & { class: Class };
 
 const columns = [
   {
@@ -46,34 +41,85 @@ const columns = [
   },
 ];
 
-const EventListPage = () => {
-  const renderRow = (item: Event) => (
-    <tr
-      key={item.id}
-      className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-schoolLightPurple dark:bg-medium dark:hover:bg-dark"
-    >
-      <td className="flex items-center gap-4 p-4">
-        <div className="flex flex-col">
-          <h3 className="font-semibold">{item.title}</h3>
-        </div>
-      </td>
-      <td className="hidden md:table-cell">{item.class}</td>
-      <td className="hidden md:table-cell">{item.date}</td>
-      <td className="hidden lg:table-cell">{item.startTime}</td>
-      <td className="hidden lg:table-cell">{item.endTime}</td>
-      <td>
-        <div className="flex items-center gap-2">
-          {role === "admin" && (
-            <>
-              <FormModal table="Event" type="update" data={item} />
-              <FormModal table="Event" type="delete" id={item.id} />
-            </>
-          )}
-        </div>
-      </td>
-    </tr>
-  );
+const renderRow = (item: EventList) => (
+  <tr
+    key={item.id}
+    className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-schoolLightPurple dark:bg-medium dark:hover:bg-dark"
+  >
+    <td className="flex items-center gap-4 p-4">
+      <div className="flex flex-col">
+        <h3 className="font-semibold">{item.title}</h3>
+      </div>
+    </td>
+    <td className="hidden md:table-cell">{item.class.name}</td>
+    <td className="hidden md:table-cell">
+      {new Intl.DateTimeFormat("en-US").format(item.startTime)}
+    </td>
+    <td className="hidden lg:table-cell">
+      {item.startTime.toLocaleTimeString("en-Us", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      })}
+    </td>
+    <td className="hidden lg:table-cell">{item.endTime.toLocaleTimeString("en-Us", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      })}</td>
+    <td>
+      <div className="flex items-center gap-2">
+        {role === "admin" && (
+          <>
+            <FormModal table="Event" type="update" data={item} />
+            <FormModal table="Event" type="delete" id={item.id} />
+          </>
+        )}
+      </div>
+    </td>
+  </tr>
+);
+async function EventListPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined };
+}) {
+  // GET SEARCHPARAMS AND CALCULATING PAGENUMBER INFO
+  const { page, ...queryParams } = await searchParams;
+  const p = page ? parseInt(page) : 1;
 
+  // URL PARAMS CONDITION
+  const query: Prisma.EventWhereInput = {};
+  if (queryParams) {
+    for (const [key, value] of Object.entries(queryParams)) {
+      if (value !== undefined) {
+        switch (key) {
+          // SEARCHING PARAMS
+          case "search":
+            query.title = { contains: value, mode: "insensitive" };
+            break;
+          default:
+            break;
+        }
+      }
+    }
+  }
+
+  const [data, count] = await prisma.$transaction([
+    prisma.event.findMany({
+      where: query,
+      include: {
+        class: true,
+      },
+
+      // DATA FETCHING OPTIMIZATION
+      take: ITEM_PER_PAGE,
+      skip: ITEM_PER_PAGE * (p - 1),
+    }),
+
+    // GET ALL DATA LENGTH
+    prisma.event.count({ where: query }),
+  ]);
   return (
     <div className="flex flex-col p-4 bg-white rounded-lg m-4 mt-0  dark:bg-medium">
       {/* HEADER */}
@@ -98,12 +144,12 @@ const EventListPage = () => {
       </div>
 
       {/* LIST */}
-      <Table columns={columns} renderRow={renderRow} data={eventsData} />
+      <Table columns={columns} renderRow={renderRow} data={data} />
 
       {/* PAGINATION */}
-      <Pagination />
+      <Pagination page={p} count={count} />
     </div>
   );
-};
+}
 
 export default EventListPage;

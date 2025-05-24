@@ -1,34 +1,16 @@
 import Announcements from "@/components/Announcements";
-import AttendanceChart from "@/components/AttendanceCart";
-import CountChart from "@/components/CountChart";
-import EventCalender from "@/components/EventCalender";
+import AttendanceChartContainer from "@/components/AttendanceChartContainer";
+import CountChartContainer from "@/components/CountChartContainer";
+import EventCalendarContainer from "@/components/EventCalendarContainer";
 import Events from "@/components/Events";
 import FinanceChart from "@/components/FinanceChart";
 import UserCart from "@/components/UserCart";
 
-const AdminPage = () => {
-  const users = [
-    {
-      type: "Teacher",
-      url: "http://localhost:4000/teachersData",
-      href: "/list/teachers",
-    },
-    {
-      type: "Student",
-      url: "http://localhost:4000/studentsData",
-      href: "/list/students",
-    },
-    {
-      type: "Parent",
-      url: "http://localhost:4000/parentsData",
-      href: "/list/parents",
-    },
-    {
-      type: "Event",
-      url: "http://localhost:4000/eventsData",
-      href: "/list/events",
-    },
-  ];
+async function AdminPage ({
+  searchParams,
+}: {
+  searchParams: { [keys: string]: string | undefined };
+}) {
 
   return (
     <div className="flex flex-col md:flex-row p-4 gap-4">
@@ -36,25 +18,20 @@ const AdminPage = () => {
       <div className="w-full lg:w-2/3 flex flex-col gap-6">
         {/* USER CART */}
         <div className="flex justify-between gap-4 flex-wrap">
-          {users.map((user) => (
-            <UserCart
-              key={user.type}
-              type={user.type}
-              apiUrl={user.url}
-              href={user.href}
-            />
-          ))}
-          {/* <UserCart type={users.teacher.type} apiUrl={users.teacher.apiUrl} /> */}
+          <UserCart type={"teacher"} url={"/list/teachers"} />
+          <UserCart type="student" url={"/list/students"} />
+          <UserCart type="parent" url={"/list/parents"} />
+          <UserCart type="event" url={"/list/events"} />
         </div>
         {/* MIDDLE CHARTS */}
         <div className="flex justify-between gap-4 flex-col lg:flex-row">
           {/* COUNT CHART */}
           <div className="w-full lg:w-1/3 h-[350px]">
-            <CountChart />
+            <CountChartContainer />
           </div>
           {/* ATTENDANCE CHART */}
           <div className="w-full lg:w-2/3 h-[350px]">
-            <AttendanceChart />
+            <AttendanceChartContainer />
           </div>
         </div>
         {/* BOTTOM CHARTS */}
@@ -69,7 +46,7 @@ const AdminPage = () => {
       <div className="w-full lg:w-1/3 flex flex-col gap-6">
         {/* EVENT CALENDER */}
         <div className="w-full">
-          <EventCalender />
+          <EventCalendarContainer searchParams={searchParams}/>
         </div>
         {/* EVENTS */}
         <div className="w-full">
@@ -79,7 +56,6 @@ const AdminPage = () => {
         <div className="w-full">
           <Announcements />
         </div>
-
       </div>
     </div>
   );
